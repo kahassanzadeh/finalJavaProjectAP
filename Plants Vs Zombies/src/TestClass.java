@@ -1,9 +1,13 @@
 import java.io.IOException;
 
+/**
+ * this class created for testing the options
+ *
+ */
 public class TestClass {
 
     public static void main(String[] args) throws IOException {
-        UserPanel ut = new UserPanel();
-        ut.showUserPanel();
+        GameMap gm = new GameMap();
+        gm.showGameMap();
     }
 }
