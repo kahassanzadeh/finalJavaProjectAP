@@ -1,3 +1,7 @@
+/**
+ * created by amirmahdi mirsharifi
+ * version 1.0
+ */
 package com.company;
 
 public class GiantWallNut extends  Plant {

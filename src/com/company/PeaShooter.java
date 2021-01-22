@@ -1,3 +1,7 @@
+/**
+ * created by amirmahdi mirsharifi
+ * version 1.0
+ */
 package com.company;
 
 public class PeaShooter extends Plant{
@@ -12,7 +16,7 @@ public class PeaShooter extends Plant{
     public void start() {
         taskTimer = new Timer(time,(ActionEvent e) -> {
             if(gc.laneZombies.get(row).size() > 0) {
-                gc.lanePeas.get(row).add(new Pea(gc, gc.cellinfo[row][column].y, 103 + gc.cellinfo[row][column].x * 100));
+                gc.lanePeas.get(row).add(new Pea(gc, row, 103 + gc.cellinfo[row][column].x * 100));
             }
         });
         taskTimer.start();
