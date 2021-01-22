@@ -26,13 +26,14 @@ public class PlantCard extends JPanel implements MouseListener {
     public PlantCard(Image image){
         setSize(64,90);
         this.image = image;
+        addMouseListener(this);
     }
 
     /**
      * setting the main action for this panel
      * @param actionListener actionListener
      */
-    public void setActionListener(ActionListener actionListener) {
+    public void setAction(ActionListener actionListener) {
         this.actionListener = actionListener;
     }
 
@@ -61,9 +62,7 @@ public class PlantCard extends JPanel implements MouseListener {
      */
     @Override
     public void mouseClicked(MouseEvent e) {
-        if(actionListener != null){
-            actionListener.actionPerformed(new ActionEvent(this,ActionEvent.RESERVED_ID_MAX+1,""));
-        }
+
     }
 
     @Override
@@ -73,7 +72,9 @@ public class PlantCard extends JPanel implements MouseListener {
 
     @Override
     public void mouseReleased(MouseEvent e) {
-
+        if(actionListener != null){
+            actionListener.actionPerformed(new ActionEvent(this,ActionEvent.RESERVED_ID_MAX+1,""));
+        }
     }
 
     @Override

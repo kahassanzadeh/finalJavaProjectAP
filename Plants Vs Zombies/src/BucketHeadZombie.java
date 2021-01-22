@@ -2,7 +2,6 @@
  * created by amirmahdi mirsharifi
  * version 1.0
  */
-package com.company;
 
 public class BucketHeadZombie extends Zombie {
     /**
@@ -14,7 +13,7 @@ public class BucketHeadZombie extends Zombie {
      * @param speed
      * @param damage
      */
-    public BucketHeadZombie(GameController gc, int zLain, int speed, int damage) {
+    public BucketHeadZombie(GameMap gc, int zLain, int speed, int damage) {
         super(gc, zLain, speed, damage);
         health=1300;
     }

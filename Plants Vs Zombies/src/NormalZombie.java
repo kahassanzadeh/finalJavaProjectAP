@@ -2,9 +2,8 @@
  * created by amirmahdi mirsharifi
  * version 1.0
  */
-package com.company;
 
-public class ConHeadZombie extends Zombie {
+public class NormalZombie extends Zombie{
     /**
      * constructor
      * set GameController , zombie's lane,speed and damage
@@ -14,8 +13,8 @@ public class ConHeadZombie extends Zombie {
      * @param speed
      * @param damage
      */
-    public ConHeadZombie(GameController gc, int zLain, int speed, int damage) {
+    public NormalZombie(GameMap gc, int zLain, int speed, int damage) {
         super(gc, zLain, speed, damage);
-        health=560;
+        health=200;
     }
 }

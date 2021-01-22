@@ -1,7 +1,7 @@
-package com.company;
+import javax.swing.*;
 
 public class Plant {
-    protected static int health;
+    protected int health;
     //plant's location
     protected int row;
     protected int column;
@@ -10,13 +10,14 @@ public class Plant {
     //The length of time the plant repeats its task
     protected int time;
     //tho object from GameController class that contain GameMap.
-    public GameController gc;
+    protected GameMap gc;
     //constructor
-    public Plant(GameController gc,int row,int column,int time){
+    public Plant(GameMap gc,int row,int column,int time,int health){
         this.row = row;
         this.column = column;
         this.gc = gc;
         this.time=time;
+        this.health = health;
     }
 
 
@@ -58,7 +59,7 @@ public class Plant {
 
 
 
-    public void setGp(GameController gc) {
+    public void setGp(GameMap gc) {
         this.gc = gc;
     }
 }

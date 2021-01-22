@@ -2,11 +2,10 @@
  * created by amirmahdi mirsharifi
  * version 1.0
  */
-package com.company;
 
 public class CherryBomb extends Plant{
-    public CherryBomb(GameController gc, int row, int column, int time) {
-        super(gc, row, column, time);
+    public CherryBomb(GameMap gc, int row, int column, int time, int health) {
+        super(gc, row, column, time, health);
     }
 
     @Override
@@ -16,7 +15,7 @@ public class CherryBomb extends Plant{
         {
             for (int j=column-1;j<=column+1;j++)
             {
-                gc.cellinfo[i][j].cellZombie.killZombie;
+                //gc.getAllGameCells()[i][j].cellZombie.killZombie;
             }
 
         }

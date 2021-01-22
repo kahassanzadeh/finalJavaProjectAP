@@ -17,21 +17,12 @@ public class CellInfo extends JPanel implements MouseListener {
     private Plant inCellPlant;
     //check if in the cell had been performed any Actions
     private ActionListener actionListener;
-
+    //
     private InsideCellType insideCellType;
 
     /**
      * constructor for this class
-     * @param e action Listener
      */
-    public CellInfo(ActionListener e){
-        this.setBorder(new LineBorder(Color.blue));
-        this.setOpaque(true);
-        this.setSize(100,120);
-        this.addMouseListener(this);
-        this.actionListener = e;
-    }
-
     public CellInfo(){
         this.setBorder(new LineBorder(Color.blue));
         this.setBackground(new Color(0,0,0,0));
@@ -44,7 +35,7 @@ public class CellInfo extends JPanel implements MouseListener {
      * setting a new plant to the cell
      * @param inCellPlant plant in this cell
      */
-    public void setInCellPlant(FreezePeaShooter inCellPlant) {
+    public void setInCellPlant(Plant inCellPlant) {
         this.inCellPlant = inCellPlant;
     }
 
@@ -85,7 +76,6 @@ public class CellInfo extends JPanel implements MouseListener {
      */
     @Override
     public void mouseClicked(MouseEvent e) {
-        actionListener.actionPerformed(new ActionEvent(this,ActionEvent.RESERVED_ID_MAX + 1,"MouseClicked"));
     }
 
     @Override
@@ -95,7 +85,7 @@ public class CellInfo extends JPanel implements MouseListener {
 
     @Override
     public void mouseReleased(MouseEvent e) {
-
+        actionListener.actionPerformed(new ActionEvent(this,ActionEvent.RESERVED_ID_MAX + 1,"MouseClicked"));
     }
 
     @Override
@@ -109,4 +99,7 @@ public class CellInfo extends JPanel implements MouseListener {
     }
 
 
+    public void setAction(ActionListener actionListener) {
+        this.actionListener = actionListener;
+    }
 }
