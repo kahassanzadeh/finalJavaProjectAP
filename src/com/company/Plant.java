@@ -2,20 +2,21 @@ package com.company;
 
 public class Plant {
     protected static int health;
-    //A number that show the amount of loss of  plant's life that set in setting Based on game level
-    protected static int reduceNumber;
     //plant's location
     protected int row;
     protected int column;
     //timer for pant's task like : shoot pea or freezePea or appear sun
     protected Timer taskTimer;
+    //The length of time the plant repeats its task
+    protected int time;
     //tho object from GameController class that contain GameMap.
     public GameController gc;
     //constructor
-    public Plant(GameController parent,int row,int column){
+    public Plant(GameController gc,int row,int column,int time){
         this.row = row;
         this.column = column;
-        gc = parent;
+        this.gc = gc;
+        this.time=time;
     }
 
 
@@ -50,14 +51,12 @@ public class Plant {
             return false;
     }
 
-    public void reduceHealth()
+    public void reduceHealth(int damage)
     {
-        health-=reduceNumber;
+        health-=damage;
     }
 
-    public void setReduceNumber(int reduceNumber) {
-        this.reduceNumber = reduceNumber;
-    }
+
 
     public void setGp(GameController gc) {
         this.gc = gc;
