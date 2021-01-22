@@ -23,13 +23,18 @@ public class GameMap extends JFrame{
 
     private CellInfo[][] allGameCells = new CellInfo[5][9];
 
-    private ArrayList<ArrayList<Zombies>> allOfZombies;
+    private ArrayList<ArrayList<Zombie>> allOfZombies;
 
-    private ArrayList<ArrayList<Peas>> allOfPeas;
+    private ArrayList<ArrayList<Pea>> allOfPeas;
 
     private ArrayList<Sun> allOfSuns;
 
-    private Timer randomZombieGenerator;
+    private Timer randomZombieGenerator ;
+
+    private int sunScore;
+
+    private JLabel sunScoreLabel;
+
 
 
     private Timer updatingScreen = new Timer(25, new ActionListener() {
@@ -156,6 +161,10 @@ public class GameMap extends JFrame{
         BufferedImage image = ImageIO.read(new File("E:\\university\\5th term\\AP\\Final Project\\PVS Design Kit\\images\\mainBG.png"));
         imageLabel = new JLabel(new ImageIcon(image));
 
+        sunScoreLabel = new JLabel("0");
+        sunScoreLabel.setLocation(37,80);
+        sunScoreLabel.setSize(60,20);
+
 
     }
 
@@ -185,6 +194,56 @@ public class GameMap extends JFrame{
         }
     }
 
+    class ActionHandlerPlantingPlant implements ActionListener{
+
+        private int row;
+
+        private int column;
+
+        public ActionHandlerPlantingPlant(int row,int column){
+            this.row = row;
+            this.column = column;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if(clickedCellType == InsideCellType.FreezePeaShooter){
+                if(sunScore >= 175){
+                    allGameCells[row][column].setInCellPlant(new FreezePeaShooter(GameMap.this,row,column));
+                    setSunScore(sunScore - 175);
+                }
+            }
+            if(clickedCellType == InsideCellType.PeaShooter){
+                if(sunScore >= 100){
+                    allGameCells[row][column].setInCellPlant(new PeaShooter(GameMap.this,row,column));
+                    setSunScore(sunScore - 100);
+                }
+            }
+            if(clickedCellType == InsideCellType.SunFlower){
+                if(sunScore >= 50){
+                    allGameCells[row][column].setInCellPlant(new SunFlower(GameMap.this,row,column));
+                    setSunScore(sunScore - 50);
+                }
+            }
+            if(clickedCellType == InsideCellType.WallNut){
+                if(sunScore >= 50){
+                    allGameCells[row][column].setInCellPlant(new GiantWallNut(GameMap.this,row,column));
+                    setSunScore(sunScore - 50);
+                }
+            }
+            if(clickedCellType == InsideCellType.CherryBomb){
+                if(sunScore >= 150){
+                    allGameCells[row][column].setInCellPlant(new CherryBomb(GameMap.this,row,column));
+                    setSunScore(sunScore - 150);
+                }
+            }
+            clickedCellType = InsideCellType.Empty;
+        }
+    }
 
 
+    private void setSunScore(int score){
+        this.sunScore = score;
+        sunScoreLabel.setText(String.valueOf(sunScore));
+    }
 }

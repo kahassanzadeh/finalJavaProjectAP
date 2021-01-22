@@ -44,7 +44,7 @@ public class CellInfo extends JPanel implements MouseListener {
      * setting a new plant to the cell
      * @param inCellPlant plant in this cell
      */
-    public void setInCellPlant(Plant inCellPlant) {
+    public void setInCellPlant(FreezePeaShooter inCellPlant) {
         this.inCellPlant = inCellPlant;
     }
 
