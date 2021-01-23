@@ -9,7 +9,7 @@ import java.awt.event.ActionEvent;
 public class PeaShooter extends Plant{
 
 
-    public PeaShooter(GameMap  gc, int row, int column,int time,int health) {
+    public PeaShooter(GameController  gc, int row, int column,int time,int health) {
         super(gc,row, column,time,health);
     }
 

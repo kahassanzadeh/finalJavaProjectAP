@@ -13,7 +13,7 @@ public class ConHeadZombie extends Zombie {
      * @param speed
      * @param damage
      */
-    public ConHeadZombie(GameMap gc, int zLain, int speed, int damage) {
+    public ConHeadZombie(GameController gc, int zLain, int speed, int damage) {
         super(gc, zLain, speed, damage);
         health=560;
     }

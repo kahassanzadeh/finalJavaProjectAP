@@ -13,7 +13,7 @@ public class NormalZombie extends Zombie{
      * @param speed
      * @param damage
      */
-    public NormalZombie(GameMap gc, int zLain, int speed, int damage) {
+    public NormalZombie(GameController gc, int zLain, int speed, int damage) {
         super(gc, zLain, speed, damage);
         health=200;
     }

@@ -10,9 +10,9 @@ public class Plant {
     //The length of time the plant repeats its task
     protected int time;
     //tho object from GameController class that contain GameMap.
-    protected GameMap gc;
+    protected GameController gc;
     //constructor
-    public Plant(GameMap gc,int row,int column,int time,int health){
+    public Plant(GameController gc,int row,int column,int time,int health){
         this.row = row;
         this.column = column;
         this.gc = gc;
@@ -59,7 +59,7 @@ public class Plant {
 
 
 
-    public void setGp(GameMap gc) {
+    public void setGp(GameController gc) {
         this.gc = gc;
     }
 }

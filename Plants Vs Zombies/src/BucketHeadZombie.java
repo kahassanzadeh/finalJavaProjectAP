@@ -13,7 +13,7 @@ public class BucketHeadZombie extends Zombie {
      * @param speed
      * @param damage
      */
-    public BucketHeadZombie(GameMap gc, int zLain, int speed, int damage) {
+    public BucketHeadZombie(GameController gc, int zLain, int speed, int damage) {
         super(gc, zLain, speed, damage);
         health=1300;
     }

@@ -6,7 +6,7 @@
 public class GiantWallNut extends  Plant {
 
 
-    public GiantWallNut(GameMap  gc, int row, int column,int time,int health) {
+    public GiantWallNut(GameController  gc, int row, int column,int time,int health) {
         super(gc,row, column,time,health);
     }
 

@@ -5,7 +5,7 @@ import java.awt.event.MouseListener;
 
 public class Sun extends JPanel implements MouseListener {
 
-    private GameMap gc;
+    private GameController gc;
 
     private int xPosition;
 
@@ -15,11 +15,12 @@ public class Sun extends JPanel implements MouseListener {
 
     private static final int deletingTime = 4;
 
-    public Sun(GameMap gc,int xPosition,int yPosition,int endingYPosition){
+    public Sun(GameController gc,int xPosition,int yPosition,int endingYPosition){
         this.gc = gc;
         this.xPosition = xPosition;
         this.yPosition = yPosition;
         this.endingYPosition = endingYPosition;
+        setBackground(new Color(0,0,0,0));
         setLocation(xPosition,yPosition);
         setSize(80,80);
 

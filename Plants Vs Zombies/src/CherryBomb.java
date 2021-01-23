@@ -4,7 +4,7 @@
  */
 
 public class CherryBomb extends Plant{
-    public CherryBomb(GameMap gc, int row, int column, int time, int health) {
+    public CherryBomb(GameController gc, int row, int column, int time, int health) {
         super(gc, row, column, time, health);
     }
 

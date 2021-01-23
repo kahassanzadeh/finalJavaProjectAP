@@ -20,14 +20,14 @@ public class Zombie {
     //The block where the plant is and the zombies have reached it
     protected CellInfo cell=null;
     //tho object from GamePanel class that contain GameMap.
-    protected GameMap gc;
+    protected GameController gc;
 
 
     /**
      * constructor
      * set GameController , zombie's lane,speed and damage
      */
-    public Zombie(GameMap gc,int zLain,int speed,int damage)
+    public Zombie(GameController gc,int zLain,int speed,int damage)
     {
         this.gc=gc;
         this.lane =zLain;

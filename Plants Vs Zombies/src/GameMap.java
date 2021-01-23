@@ -18,30 +18,18 @@ import java.util.ArrayList;
  * @since Jan 13 2020
  * @version 1.0
  */
-public class GameMap extends JFrame implements MouseMotionListener {
-    //background of the game
-    private JLabel imageLabel;
-    //the card that had been clicked
-    private InsideCellType clickedCellType;
+public class GameMap extends JFrame{
 
-    private CellInfo[][] allGameCells = new CellInfo[5][9];
 
-    private ArrayList<ArrayList<Zombie>> allOfZombies;
-
-    private ArrayList<ArrayList<Pea>> allOfPeas;
-
-    private ArrayList<Sun> allOfSuns;
-
-    private Timer randomZombieGenerator ;
-
-    private int sunScore = 100;
+    private GameController gameController;
 
     private JLabel sunScoreLabel;
 
-    private int x,y;
+    private int sunScore = 100;
 
 
-    private Timer updatingScreen;
+
+
 
     /**
      * constructor for setting some pictures and make the Game UI
@@ -49,15 +37,8 @@ public class GameMap extends JFrame implements MouseMotionListener {
      * @throws IOException if the pictures Address Was Wrong
      */
     public GameMap() throws IOException {
-
         initFrame();
         initCardsAndLawns();
-
-
-
-
-
-
 
     }
 
@@ -65,8 +46,8 @@ public class GameMap extends JFrame implements MouseMotionListener {
      * showing the game map
      */
     public void showGameMap(){
-        this.pack();
-        this.setVisible(true);
+        pack();
+        setVisible(true);
     }
 
     /**
@@ -87,205 +68,74 @@ public class GameMap extends JFrame implements MouseMotionListener {
 
         PlantCard sunflowerCard = new PlantCard(new ImageIcon(sunflowerPic).getImage());
         sunflowerCard.setLocation(110, 8);
-        sunflowerCard.setAction(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                clickedCellType = InsideCellType.SunFlower;
-            }
+        sunflowerCard.setAction((ActionEvent e) -> {
+            gameController.setClickedCellType(InsideCellType.SunFlower);
         });
-        add(sunflowerCard);
+        getLayeredPane().add(sunflowerCard,JLayeredPane.MODAL_LAYER);
 
         PlantCard peaShooterCard = new PlantCard(new ImageIcon(peaShooterPic).getImage());
         peaShooterCard.setLocation(175, 8);
-        peaShooterCard.setAction(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                clickedCellType = InsideCellType.PeaShooter;
-            }
+        peaShooterCard.setAction((ActionEvent e) -> {
+            gameController.setClickedCellType(InsideCellType.PeaShooter);
         });
-        add(peaShooterCard);
+        getLayeredPane().add(peaShooterCard,JLayeredPane.MODAL_LAYER);
 
         PlantCard freezePeaShooterCard = new PlantCard(new ImageIcon(freezePeaShooterPic).getImage());
         freezePeaShooterCard.setLocation(240, 8);
-        freezePeaShooterCard.setAction(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                clickedCellType = InsideCellType.FreezePeaShooter;
-            }
+        freezePeaShooterCard.setAction((ActionEvent e) -> {
+            gameController.setClickedCellType(InsideCellType.FreezePeaShooter);
         });
-        add(freezePeaShooterCard);
+        getLayeredPane().add(freezePeaShooterCard,JLayeredPane.MODAL_LAYER);
 
         PlantCard wallNutCard = new PlantCard(new ImageIcon(wallNutPic).getImage());
         wallNutCard.setLocation(305, 8);
-        wallNutCard.setAction(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                clickedCellType = InsideCellType.WallNut;
-            }
+        wallNutCard.setAction((ActionEvent e) -> {
+            gameController.setClickedCellType(InsideCellType.WallNut);
         });
-        add(wallNutCard);
+        getLayeredPane().add(wallNutCard,JLayeredPane.MODAL_LAYER);
 
         PlantCard cherryBombCard = new PlantCard(new ImageIcon(cherryBombPic).getImage());
         cherryBombCard.setLocation(370, 8);
-        cherryBombCard.setAction(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                clickedCellType = InsideCellType.CherryBomb;
-            }
+        cherryBombCard.setAction((ActionEvent e) -> {
+            gameController.setClickedCellType(InsideCellType.CherryBomb);
         });
-        add(cherryBombCard);
+        getLayeredPane().add(cherryBombCard,JLayeredPane.MODAL_LAYER);
 
         for (int i = 1; i <= 5; i++) {
             LawnMower lw = new LawnMower(new ImageIcon(lawnMower).getImage());
             lw.setLocation(-25, 120 * i);
-            add(lw);
+            getLayeredPane().add(lw,JLayeredPane.MODAL_LAYER);
         }
-        for(int i = 0; i < 5; i++){
-            for(int j = 0; j < 9; j++){
-                allGameCells[i][j] = new CellInfo();
-                allGameCells[i][j].setLocation(44 + (j*100),109 + (i*120));
-                allGameCells[i][j].setAction(new ActionHandlerPlantingPlant(j,i));
-                getLayeredPane().add(allGameCells[i][j],1);
-            }
-        }
-        add(imageLabel);
 
-        updatingScreen = new Timer(25, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                repaint();
-            }
-        });
-        updatingScreen.start();
+        getLayeredPane().add(sunScoreLabel,JLayeredPane.PALETTE_LAYER);
+
+
+
     }
 
     private void initFrame() throws IOException {
 
-        this.setLocation(200,20);
-        this.setSize(1000,752);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocation(200,20);
+        setSize(1012,785);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JLabel mainBG = new JLabel(new ImageIcon("E:\\university\\5th term\\AP\\Final Project\\PVS Design Kit\\images\\mainBG.png"));
+        add(mainBG);
 
-        BufferedImage image = ImageIO.read(new File("E:\\university\\5th term\\AP\\Final Project\\PVS Design Kit\\images\\mainBG.png"));
-        imageLabel = new JLabel(new ImageIcon(image));
+        gameController = new GameController();
+        gameController.setLocation(0,0);
+        getLayeredPane().add(gameController,JLayeredPane.DEFAULT_LAYER);
+
 
         sunScoreLabel = new JLabel(String.valueOf(sunScore));
         sunScoreLabel.setLocation(50,80);
         sunScoreLabel.setSize(60,20);
         sunScoreLabel.setFont(new Font("Times New Roman",Font.BOLD,17));
-        this.add(sunScoreLabel);
 
 
     }
 
-    @Override
-    public void paintComponents(Graphics g) {
-        super.paintComponents(g);
-        g.drawImage(GameImages.getBackgroundImage(),0,0,null);
-
-        for(int i = 0; i < 5;i++){
-            for(int j = 0; j < 9; j++){
-                if(allGameCells[i][j].getInCellPlant() instanceof PeaShooter){
-                    g.drawImage(GameImages.getPeaShooterImage(),60 + (j * 100),129 + (i * 120),null);
-                }
-                else if(allGameCells[i][j].getInCellPlant() instanceof FreezePeaShooter){
-                    g.drawImage(GameImages.getFreezePeaShooterImage(),60 + (j * 100),129 + (i * 120),null);
-                }
-                else if(allGameCells[i][j].getInCellPlant() instanceof SunFlower){
-                    g.drawImage(GameImages.getSunFlowerImage(),60 + (j * 100),129 + (i * 120),null);
-                }
-                else if(allGameCells[i][j].getInCellPlant() instanceof GiantWallNut){
-                    g.drawImage(GameImages.getWallNutImage(),60 + (j * 100),129 + (i * 120),null);
-                }
-                else if(allGameCells[i][j].getInCellPlant() instanceof CherryBomb){
-                    g.drawImage(GameImages.getCherryBomb(),60 + (j * 100),129 + (i * 120),null);
-                }
-            }
-        }
-    }
-
-    @Override
-    public void mouseDragged(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseMoved(MouseEvent e) {
-        this.x = e.getX();
-        this.y = e.getY();
-    }
-
-    class ActionHandlerPlantingPlant implements ActionListener{
-
-        private int row;
-
-        private int column;
-
-        public ActionHandlerPlantingPlant(int row,int column){
-            this.row = row;
-            this.column = column;
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            if(clickedCellType == InsideCellType.FreezePeaShooter){
-                if(sunScore >= 175){
-                    allGameCells[row][column].setInCellPlant(new FreezePeaShooter(GameMap.this,row,column,2000,100));
-                    setSunScore(sunScore - 175);
-                }
-            }
-            if(clickedCellType == InsideCellType.PeaShooter){
-                if(sunScore >= 100){
-                    allGameCells[row][column].setInCellPlant(new PeaShooter(GameMap.this,row,column,2000,100));
-                    setSunScore(sunScore - 100);
-                }
-            }
-            if(clickedCellType == InsideCellType.SunFlower){
-                if(sunScore >= 50){
-                    allGameCells[row][column].setInCellPlant(new SunFlower(GameMap.this,row,column,2000,100));
-                    setSunScore(sunScore - 50);
-                }
-            }
-            if(clickedCellType == InsideCellType.WallNut){
-                if(sunScore >= 50){
-                    allGameCells[row][column].setInCellPlant(new GiantWallNut(GameMap.this,row,column,2000,100));
-                    setSunScore(sunScore - 50);
-                }
-            }
-            if(clickedCellType == InsideCellType.CherryBomb){
-                if(sunScore >= 150){
-                    allGameCells[row][column].setInCellPlant(new CherryBomb(GameMap.this,row,column,2000,100));
-                    setSunScore(sunScore - 150);
-                }
-            }
-            clickedCellType = InsideCellType.Empty;
-        }
-    }
-
-
-    public void setSunScore(int score){
-        this.sunScore = score;
-        sunScoreLabel.setText(String.valueOf(sunScore));
-    }
-
-    public CellInfo[][] getAllGameCells() {
-        return allGameCells;
-    }
-
-    public ArrayList<ArrayList<Zombie>> getAllOfZombies() {
-        return allOfZombies;
-    }
-
-    public ArrayList<ArrayList<Pea>> getAllOfPeas() {
-        return allOfPeas;
-    }
-
-    public void addSuns(Sun sun){
-        this.allOfSuns.add(sun);
-        this.add(sun);
-    }
-
-    public ArrayList<Sun> getAllOfSuns() {
-        return allOfSuns;
+    public JLabel getSunScoreLabel() {
+        return sunScoreLabel;
     }
 
     public int getSunScore() {

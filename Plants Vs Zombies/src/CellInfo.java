@@ -76,6 +76,9 @@ public class CellInfo extends JPanel implements MouseListener {
      */
     @Override
     public void mouseClicked(MouseEvent e) {
+        if(actionListener != null){
+            actionListener.actionPerformed(new ActionEvent(this,ActionEvent.RESERVED_ID_MAX + 1,"MouseClicked"));
+        }
     }
 
     @Override
@@ -85,7 +88,6 @@ public class CellInfo extends JPanel implements MouseListener {
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        actionListener.actionPerformed(new ActionEvent(this,ActionEvent.RESERVED_ID_MAX + 1,"MouseClicked"));
     }
 
     @Override

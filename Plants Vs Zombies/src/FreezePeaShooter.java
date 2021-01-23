@@ -9,7 +9,7 @@ import java.awt.event.ActionEvent;
 public class FreezePeaShooter extends Plant {
 
 
-    public FreezePeaShooter(GameMap  gc, int row, int column,int time,int health) {
+    public FreezePeaShooter(GameController  gc, int row, int column,int time,int health) {
         super(gc,row, column,time,health);
 
     }

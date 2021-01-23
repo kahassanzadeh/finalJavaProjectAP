@@ -8,10 +8,10 @@ import java.awt.*;
 public class Pea {
 
     public int posX;
-    protected GameMap gc;
+    protected GameController gc;
     public int myLane;
 
-    public Pea(GameMap  gc,int lane,int startX){
+    public Pea(GameController  gc,int lane,int startX){
         this.gc = gc;
         this.myLane = lane;
         posX = startX;

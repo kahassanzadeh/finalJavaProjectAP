@@ -8,7 +8,7 @@ import java.awt.*;
 
 public class FreezePea extends Pea {
 
-    public FreezePea(GameMap  gc,int lane,int startX){
+    public FreezePea(GameController  gc,int lane,int startX){
         super(gc,lane,startX);
     }
 

@@ -50,9 +50,9 @@ public class PlantCard extends JPanel implements MouseListener {
      * @param g Graphics
      */
     @Override
-    protected void paintComponent(Graphics g){
+    public void paint(Graphics g){
         super.paintComponent(g);
-        g.drawImage(this.image,0,0,null);
+        g.drawImage(image,0,0,null);
     }
 
     /**
