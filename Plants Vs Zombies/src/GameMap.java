@@ -25,7 +25,9 @@ public class GameMap extends JFrame{
 
     private JLabel sunScoreLabel;
 
-    private int sunScore = 100;
+    private int sunScore = 300;
+
+    private int score;
 
 
 
@@ -102,12 +104,11 @@ public class GameMap extends JFrame{
         getLayeredPane().add(cherryBombCard,JLayeredPane.MODAL_LAYER);
 
         for (int i = 1; i <= 5; i++) {
-            LawnMower lw = new LawnMower(new ImageIcon(lawnMower).getImage());
-            lw.setLocation(-25, 120 * i);
-            getLayeredPane().add(lw,JLayeredPane.MODAL_LAYER);
+            LawnMower lw = new LawnMower(new ImageIcon(lawnMower).getImage(),i - 1,gameController);
+            gameController.getAllOfLawnMowers().add(lw);
         }
 
-        getLayeredPane().add(sunScoreLabel,JLayeredPane.PALETTE_LAYER);
+        getLayeredPane().add(sunScoreLabel,JLayeredPane.MODAL_LAYER);
 
 
 
@@ -121,15 +122,16 @@ public class GameMap extends JFrame{
         JLabel mainBG = new JLabel(new ImageIcon("E:\\university\\5th term\\AP\\Final Project\\PVS Design Kit\\images\\mainBG.png"));
         add(mainBG);
 
-        gameController = new GameController();
-        gameController.setLocation(0,0);
-        getLayeredPane().add(gameController,JLayeredPane.DEFAULT_LAYER);
-
-
         sunScoreLabel = new JLabel(String.valueOf(sunScore));
         sunScoreLabel.setLocation(50,80);
         sunScoreLabel.setSize(60,20);
         sunScoreLabel.setFont(new Font("Times New Roman",Font.BOLD,17));
+
+        gameController = new GameController(sunScoreLabel,sunScore);
+        gameController.setLocation(0,0);
+        getLayeredPane().add(gameController,JLayeredPane.DEFAULT_LAYER);
+
+
 
 
     }
@@ -140,5 +142,9 @@ public class GameMap extends JFrame{
 
     public int getSunScore() {
         return sunScore;
+    }
+
+    public int getScore() {
+        return score;
     }
 }

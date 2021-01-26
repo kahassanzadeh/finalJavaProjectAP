@@ -19,7 +19,7 @@ public class FreezePeaShooter extends Plant {
     public void start() {
         taskTimer = new Timer(time,(ActionEvent e) -> {
             if(gc.getAllOfZombies().get(row).size() > 0) {
-                gc.getAllOfPeas().get(row).add(new FreezePea(gc, row, 103 + this.row * 100));
+                gc.getAllOfPeas().get(row).add(new FreezePea(gc, row, 103 + this.column * 100));
             }
         });
         taskTimer.start();

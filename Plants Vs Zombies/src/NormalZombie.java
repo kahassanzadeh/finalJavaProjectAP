@@ -10,11 +10,11 @@ public class NormalZombie extends Zombie{
      *
      * @param gc
      * @param zLain
-     * @param speed
      * @param damage
      */
-    public NormalZombie(GameController gc, int zLain, int speed, int damage) {
-        super(gc, zLain, speed, damage);
-        health=200;
+    public NormalZombie(GameController gc, int zLain, int damage) {
+        super(gc, zLain, damage);
+        this.speed = 2;
+        this.health = 200;
     }
 }

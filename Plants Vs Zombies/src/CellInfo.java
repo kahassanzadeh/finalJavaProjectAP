@@ -24,11 +24,11 @@ public class CellInfo extends JPanel implements MouseListener {
      * constructor for this class
      */
     public CellInfo(){
-        this.setBorder(new LineBorder(Color.blue));
+        this.setBorder(new LineBorder(Color.red));
         this.setBackground(new Color(0,0,0,0));
-        this.setOpaque(true);
-        this.setSize(100,120);
-        this.addMouseListener(this);
+        setOpaque(true);
+        setSize(100,120);
+        addMouseListener(this);
     }
 
     /**
@@ -76,9 +76,7 @@ public class CellInfo extends JPanel implements MouseListener {
      */
     @Override
     public void mouseClicked(MouseEvent e) {
-        if(actionListener != null){
-            actionListener.actionPerformed(new ActionEvent(this,ActionEvent.RESERVED_ID_MAX + 1,"MouseClicked"));
-        }
+
     }
 
     @Override
@@ -88,6 +86,9 @@ public class CellInfo extends JPanel implements MouseListener {
 
     @Override
     public void mouseReleased(MouseEvent e) {
+        if(actionListener != null){
+            actionListener.actionPerformed(new ActionEvent(this,ActionEvent.RESERVED_ID_MAX + 1,"MouseClicked"));
+        }
     }
 
     @Override
@@ -104,4 +105,6 @@ public class CellInfo extends JPanel implements MouseListener {
     public void setAction(ActionListener actionListener) {
         this.actionListener = actionListener;
     }
+
+
 }

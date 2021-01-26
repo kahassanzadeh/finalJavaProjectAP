@@ -1,3 +1,6 @@
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+
 /**
  * created by amirmahdi mirsharifi
  * version 1.0
@@ -8,9 +11,9 @@ public class Zombie {
     //The amount of zombie lives that set at subclasses.
     protected int health;
     // the zombie's speed Is defined in gameSetting fits game level(Normal,Hard) and is set at constructor.
-    protected int speed;
+    protected double speed;
     //zombie's location
-    protected int posX=1000;
+    protected double posX=1000;
     //The amount that zombies reduce the life of the plant
     protected int damage;
     //this field show this zombie is at which lain of map.
@@ -21,18 +24,25 @@ public class Zombie {
     protected CellInfo cell=null;
     //tho object from GamePanel class that contain GameMap.
     protected GameController gc;
+    //checking if the object isSlowed
+    protected boolean isSlowed = false;
+    //returning to normal speed
+    protected Timer countingIsSlowed = new Timer(2000,(ActionEvent e)->{
+        if(isSlowed == true){
+            returnToMainSpeed();
+        }
+    });
 
 
     /**
      * constructor
      * set GameController , zombie's lane,speed and damage
      */
-    public Zombie(GameController gc,int zLain,int speed,int damage)
+    public Zombie(GameController gc,int zLain,int damage)
     {
-        this.gc=gc;
-        this.lane =zLain;
-        this.speed=speed;
-        this.damage=damage;
+        this.gc = gc;
+        this.lane = zLain;
+        this.damage = damage;
     }
 
 
@@ -45,7 +55,6 @@ public class Zombie {
     {
         if (isMoving)
         {
-
             if (recognition())
             {
                 cell.getInCellPlant().reduceHealth(damage);
@@ -54,7 +63,7 @@ public class Zombie {
             }
 
             else
-                posX-=speed;
+                posX -= speed;
         }
 
         if (posX < 0)
@@ -62,6 +71,7 @@ public class Zombie {
             isMoving = false;
             /*GameWindow.gw.dispose();
             GameWindow.gw = new GameWindow();*/
+
         }
 
     }
@@ -76,7 +86,7 @@ public class Zombie {
         boolean isCells = false;
         cell=null;
         for (int i =0; i < 9; i++) {
-            if (gc.getAllGameCells()[lane][i].getInCellPlant() != null && gc.getAllGameCells()[lane][i].isInsideCell(posX)) {
+            if (gc.getAllGameCells()[lane][i].getInCellPlant() != null && gc.getAllGameCells()[lane][i].isInsideCell((int) posX)) {
                 isCells = true;
                 cell = gc.getAllGameCells()[lane][i];
             }
@@ -88,6 +98,7 @@ public class Zombie {
 
     public void slow()
     {
+        isSlowed = true;
         speed=speed/2;
     }
 
@@ -105,7 +116,7 @@ public class Zombie {
      */
     public void reduceHealth(int reduceNum)
     {
-        health-=reduceNum;
+        health -= reduceNum;
     }
 
     /**
@@ -116,4 +127,21 @@ public class Zombie {
     {
         health=0;
     }
+
+    public int getPosX() {
+        return (int) posX;
+    }
+
+    public int getLane() {
+        return lane;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+    public void returnToMainSpeed(){
+        speed = speed * 2;
+        isSlowed = false;
+    }
+
 }

@@ -29,7 +29,7 @@ public class GameImages {
     private static final Image wallNutImage = new ImageIcon("E:\\university\\5th term\\AP\\Final Project\\PVS Design Kit\\images\\Gifs\\walnut_full_life.gif").getImage();
 
 
-    private static final Image cherryBomb = new ImageIcon("E:\\university\\5th term\\AP\\Final Project\\PVS Design Kit\\images\\Gifs\\walnut_full_life.gif").getImage();
+    private static Image cherryBomb = new ImageIcon("E:\\university\\5th term\\AP\\Final Project\\PVS Design Kit\\images\\cherrybomb.png").getImage();
 
 
     private static Image sunImage = new ImageIcon("E:\\university\\5th term\\AP\\Final Project\\PVS Design Kit\\images\\sun.png").getImage();
@@ -81,7 +81,6 @@ public class GameImages {
     }
 
     public static Image getSunImage() {
-        sunImage = sunImage.getScaledInstance(60,60,Image.SCALE_SMOOTH);
         return sunImage;
     }
 }
