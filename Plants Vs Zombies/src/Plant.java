@@ -6,7 +6,7 @@ public class Plant {
     protected int row;
     protected int column;
     //timer for pant's task like : shoot pea or freezePea or appear sun
-    protected Timer taskTimer;
+    protected Timer taskTimer = null;
     //The length of time the plant repeats its task
     protected int time;
     //tho object from GameController class that contain GameMap.
@@ -35,7 +35,9 @@ public class Plant {
 
     public void stop()
     {
-
+        if(taskTimer != null){
+            taskTimer.stop();
+        }
     }
 
     /**
@@ -46,8 +48,12 @@ public class Plant {
     public boolean isDead()
     {
 
-        if(health<=0)
+        if(health<=0){
+            if(taskTimer != null){
+                taskTimer.stop();
+            }
             return true;
+        }
         else
             return false;
     }
@@ -61,5 +67,13 @@ public class Plant {
 
     public void setGp(GameController gc) {
         this.gc = gc;
+    }
+
+    public int getColumn() {
+        return column;
+    }
+
+    public int getRow() {
+        return row;
     }
 }

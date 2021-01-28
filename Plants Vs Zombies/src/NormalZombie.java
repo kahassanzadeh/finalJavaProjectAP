@@ -14,7 +14,7 @@ public class NormalZombie extends Zombie{
      */
     public NormalZombie(GameController gc, int zLain, int damage) {
         super(gc, zLain, damage);
-        this.speed = 2;
+        this.speed = 0.38;
         this.health = 200;
     }
 }

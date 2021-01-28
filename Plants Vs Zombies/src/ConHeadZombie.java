@@ -12,9 +12,9 @@ public class ConHeadZombie extends Zombie {
      * @param zLain
      * @param damage
      */
-    public ConHeadZombie(GameController gc, int zLain, int damage) {
+    public ConHeadZombie(GameController gc, int zLain, int damage,double speed) {
         super(gc, zLain, damage);
-        this.speed = 0.5;
+        this.speed = speed;
         health = 560;
     }
 }

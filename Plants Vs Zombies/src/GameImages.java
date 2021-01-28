@@ -29,12 +29,15 @@ public class GameImages {
     private static final Image wallNutImage = new ImageIcon("E:\\university\\5th term\\AP\\Final Project\\PVS Design Kit\\images\\Gifs\\walnut_full_life.gif").getImage();
 
 
-    private static Image cherryBomb = new ImageIcon("E:\\university\\5th term\\AP\\Final Project\\PVS Design Kit\\images\\cherrybomb.png").getImage();
+    private static Image cherryBomb = new ImageIcon("E:\\university\\5th term\\AP\\Final Project\\PVS Design Kit\\images\\Gifs\\newCherryBomb.gif").getImage();
 
 
     private static Image sunImage = new ImageIcon("E:\\university\\5th term\\AP\\Final Project\\PVS Design Kit\\images\\sun.png").getImage();
 
 
+    private static Image secondWavePic = new ImageIcon("E:\\university\\5th term\\AP\\Final Project\\PVS Design Kit\\images\\secondWave.png").getImage();
+
+    private static Image thirdWavePic = new ImageIcon("E:\\university\\5th term\\AP\\Final Project\\PVS Design Kit\\images\\thirdWave.png").getImage();
 
     public static  Image getBackgroundImage() {
         return backgroundImage;
@@ -83,4 +86,21 @@ public class GameImages {
     public static Image getSunImage() {
         return sunImage;
     }
+
+    public static Image getSecondWavePic() {
+        /*JLabel temp = new JLabel(secondWavePic);
+        temp.setBackground(new Color(0,0,0,0));
+        temp.setOpaque(true);
+        return temp;*/
+        return secondWavePic;
+    }
+
+    public static Image getThirdWave(){
+        /*JLabel temp = new JLabel(secondWavePic);
+        temp.setBackground(new Color(0,0,0,0));
+        temp.setOpaque(true);
+        return temp;*/
+        return thirdWavePic;
+    }
+
 }

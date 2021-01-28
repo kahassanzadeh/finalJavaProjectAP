@@ -19,14 +19,32 @@ public class PlantCard extends JPanel implements MouseListener {
     //saving the action happens to the card
     private ActionListener actionListener;
 
+    private boolean cardIsAvailable = true;
+
+    private Timer secondCounter;
+
+    private int counter;
+
+    private int coolDown;
+
     /**
      * constructor of the card
      * @param image image of the card
      */
-    public PlantCard(Image image){
+    public PlantCard(Image image,int seconds){
         setSize(64,90);
         this.image = image;
         addMouseListener(this);
+        this.coolDown = seconds;
+        secondCounter = new Timer(500,(ActionEvent e)->{
+            counter += 500;
+            if(counter == coolDown){
+                cardIsAvailable = true;
+                counter = 0;
+                secondCounter.stop();
+            }
+        });
+
     }
 
     /**
@@ -72,8 +90,10 @@ public class PlantCard extends JPanel implements MouseListener {
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        if(actionListener != null){
+        if(actionListener != null && cardIsAvailable){
             actionListener.actionPerformed(new ActionEvent(this,ActionEvent.RESERVED_ID_MAX+1,""));
+            cardIsAvailable = false;
+            secondCounter.start();
         }
     }
 

@@ -33,6 +33,16 @@ public class Zombie {
         }
     });
 
+    protected Timer damagingThePlant = new Timer(1000,(ActionEvent e)->{
+        if(cell != null){
+            try{
+                cell.getInCellPlant().reduceHealth(damage);
+            }catch(Exception ignored){
+
+            }
+        }
+    });
+
 
     /**
      * constructor
@@ -57,9 +67,11 @@ public class Zombie {
         {
             if (recognition())
             {
-                cell.getInCellPlant().reduceHealth(damage);
-                if (cell.getInCellPlant().isDead() )
-                cell.removeInCellPlant();
+                damagingThePlant.start();
+                if (cell.getInCellPlant().isDead()){
+                    cell.removeInCellPlant();
+                    damagingThePlant.stop();
+                }
             }
 
             else
@@ -71,6 +83,8 @@ public class Zombie {
             isMoving = false;
             /*GameWindow.gw.dispose();
             GameWindow.gw = new GameWindow();*/
+            gc.GameOver();
+
 
         }
 
