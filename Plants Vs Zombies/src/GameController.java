@@ -115,7 +115,7 @@ public class GameController extends JLayeredPane implements MouseMotionListener 
         });
         sunProducer.start();
 
-        firstStageZombieGenerator = new Timer(3000,(ActionEvent e)->{
+        firstStageZombieGenerator = new Timer(30000,(ActionEvent e)->{
             SecureRandom secureRandom = new SecureRandom();
             int lane = secureRandom.nextInt(5);
             int zombie = secureRandom.nextInt(3);
@@ -200,8 +200,6 @@ public class GameController extends JLayeredPane implements MouseMotionListener 
             }
         }
 
-
-
     }
 
     @Override
@@ -225,9 +223,9 @@ public class GameController extends JLayeredPane implements MouseMotionListener 
                 }
                 else if(allGameCells[i][j].getInCellPlant() instanceof CherryBomb){
                     g.drawImage(GameImages.getCherryBomb(),50 + (j * 100),110 + (i * 120),null);
-                    Graphics2D g2 = (Graphics2D) g;
+                   /* Graphics2D g2 = (Graphics2D) g;
                     g2.setColor(Color.ORANGE);
-                    g2.fillRect(44 + ((allGameCells[i][j].getInCellPlant().getColumn() - 1) * 100),109 + ((allGameCells[i][j].getInCellPlant().getRow() - 1) * 120),300,360);
+                    g2.fillRect(44 + ((allGameCells[i][j].getInCellPlant().getColumn() - 1) * 100),109 + ((allGameCells[i][j].getInCellPlant().getRow() - 1) * 120),300,360);*/
                 }
             }
         }
@@ -307,7 +305,6 @@ public class GameController extends JLayeredPane implements MouseMotionListener 
         gameOver = true;
         JOptionPane.showMessageDialog(this,"Zombies eat your brain !!!");
         gameMap.dispose();
-
 
 
     }

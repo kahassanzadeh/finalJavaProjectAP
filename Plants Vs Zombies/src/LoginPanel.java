@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * this class created for the login Panel of the game
@@ -48,12 +50,42 @@ public class LoginPanel {
         fields.add(passwordLabel);
         fields.add(passwordField);
 
+        JPanel buttons = new JPanel(new GridLayout(1,2,5,5));
+
+
         JButton loginButton = new JButton("Login");
+        loginButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Person registeredPerson;
+                try {
+                    registeredPerson = PlayerController.searchPerson(userNameField.getText(), String.valueOf(passwordField.getPassword()));
+                    closeLoginPanel();
+                    registeredPerson.showUserPanel();
+                } catch (Exception exception) {
+                    JOptionPane.showMessageDialog(frame,"Invalid UserName or Password, PLease Try Again","Error",JOptionPane.ERROR_MESSAGE);
+                    passwordField.setText("");
+                    userNameField.setText("");
+                }
+            }
+        });
+
+        JButton newPersonEnroll = new JButton("Make An Account");
+        newPersonEnroll.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                EnrollmentPanel enrollment = new EnrollmentPanel();
+                enrollment.showEnrollmentPanel();
+            }
+        });
+
+        buttons.add(loginButton);
+        buttons.add(newPersonEnroll);
 
 
         panel.add(label,BorderLayout.NORTH);
         panel.add(fields,BorderLayout.CENTER);
-        panel.add(loginButton,BorderLayout.SOUTH);
+        panel.add(buttons,BorderLayout.SOUTH);
     }
 
     /**
@@ -71,4 +103,7 @@ public class LoginPanel {
     private void closeLoginPanel(){
         frame.setVisible(false);
     }
+
+
+
 }

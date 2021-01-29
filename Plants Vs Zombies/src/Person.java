@@ -19,15 +19,26 @@ public class Person {
 
     private int highScore;
 
+    private UserPanel userPanel;
+
     public Person(String name,String userName,String password){
         this.name = name;
         this.userName = userName;
         this.password = password;
+        try{
+            userPanel = new UserPanel();
+        } catch (IOException ignored) {
+        }
         allOfGames = new ArrayList<>();
     }
 
-    public void beginGame(GameMap gameMap){
-        gameMap.showGameMap();
+    public void beginGame(String difficulty){
+        try{
+            GameMap gameMap = new GameMap(difficulty);
+            gameMap.showGameMap();
+        }catch(Exception ignored){
+
+        }
     }
 
     public GameMap readGame(){
@@ -66,4 +77,15 @@ public class Person {
         highScore = max;
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void showUserPanel(){
+        userPanel.showUserPanel();
+    }
 }

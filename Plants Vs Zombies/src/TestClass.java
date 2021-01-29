@@ -7,7 +7,7 @@ import java.io.IOException;
 public class TestClass {
 
     public static void main(String[] args) throws IOException {
-        GameMap gm = new GameMap("Normal");
-        gm.showGameMap();
+        LoginPanel lp = new LoginPanel();
+        lp.showLoginPanel();
     }
 }
