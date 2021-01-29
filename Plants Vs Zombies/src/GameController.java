@@ -5,8 +5,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.security.SecureRandom;
-import java.sql.Array;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -22,13 +20,13 @@ public class GameController extends JLayeredPane implements MouseMotionListener 
 
     private Timer randomZombieGenerator ;
 
-    private Timer sunProducer;
+    private final Timer sunProducer;
 
-    private Timer advanceTimer;
+    private final Timer advanceTimer;
 
     private int sunScore ;
 
-    private Timer  updatingScreen;
+    private final Timer  updatingScreen;
 
     //the card that had been clicked
     private InsideCellType clickedCellType;
@@ -37,23 +35,23 @@ public class GameController extends JLayeredPane implements MouseMotionListener 
 
     private ArrayList<LawnMower> allOfLawnMowers;
 
-    private String gameMode;
+    private final String gameMode;
 
-    private int stage;
+    private final int stage;
 
     private boolean gameOver = false;
 
-    private GameMap gameMap;
+    private final GameMap gameMap;
 
     private int seconds = 0;
 
     private Timer secondsCounter;
 
-    private Timer firstStageZombieGenerator;
+    private final Timer firstStageZombieGenerator;
 
-    private Timer secondStageZombieGenerator;
+    private final Timer secondStageZombieGenerator;
 
-    private Timer thirdStageZombieGenerator;
+    private final Timer thirdStageZombieGenerator;
 
 
 
@@ -117,7 +115,7 @@ public class GameController extends JLayeredPane implements MouseMotionListener 
         });
         sunProducer.start();
 
-        firstStageZombieGenerator = new Timer(30000,(ActionEvent e)->{
+        firstStageZombieGenerator = new Timer(3000,(ActionEvent e)->{
             SecureRandom secureRandom = new SecureRandom();
             int lane = secureRandom.nextInt(5);
             int zombie = secureRandom.nextInt(3);
@@ -159,6 +157,14 @@ public class GameController extends JLayeredPane implements MouseMotionListener 
             }else if(seconds == 331){
                 secondStageZombieGenerator.stop();
                 thirdStageZombieGenerator.start();
+            }else if(seconds == 481){
+                gameOver = false;
+                JOptionPane.showMessageDialog(this,"Congratulations! You Won");
+                gameMap.dispose();
+                thirdStageZombieGenerator.stop();
+                updatingScreen.stop();
+                advanceTimer.stop();
+                sunProducer.stop();
             }
         });
         secondsCounter.start();
@@ -187,8 +193,10 @@ public class GameController extends JLayeredPane implements MouseMotionListener 
         }
 
         for(int i = 0; i < allOfLawnMowers.size();i++){
-            if(allOfZombies.get(allOfLawnMowers.get(i).getLane()).size() > 0){
+            if(allOfLawnMowers.get(i).getShouldStart()){
                 allOfLawnMowers.get(i).start();
+            }else{
+                allOfLawnMowers.get(i).advance();
             }
         }
 
@@ -217,9 +225,9 @@ public class GameController extends JLayeredPane implements MouseMotionListener 
                 }
                 else if(allGameCells[i][j].getInCellPlant() instanceof CherryBomb){
                     g.drawImage(GameImages.getCherryBomb(),50 + (j * 100),110 + (i * 120),null);
-                    /*Graphics2D g2 = (Graphics2D) g;
+                    Graphics2D g2 = (Graphics2D) g;
                     g2.setColor(Color.ORANGE);
-                    g2.fillRect(44 + ((allGameCells[i][j].getInCellPlant().getColumn() - 1) * 100),109 + ((allGameCells[i][j].getInCellPlant().getRow() - 1) * 120),300,360);*/
+                    g2.fillRect(44 + ((allGameCells[i][j].getInCellPlant().getColumn() - 1) * 100),109 + ((allGameCells[i][j].getInCellPlant().getRow() - 1) * 120),300,360);
                 }
             }
         }
@@ -228,6 +236,10 @@ public class GameController extends JLayeredPane implements MouseMotionListener 
             for(Zombie z : arrayZ){
                 if(z instanceof NormalZombie){
                     g.drawImage(GameImages.getNormalZombieImage(),z.getPosX(),109+(z.getLane()*120),null);
+                    /*Graphics2D g2 = (Graphics2D) g;
+                    g2.setColor(Color.ORANGE);
+                    g2.fillRect((int) z.posX,109 + z.lane * 120,400,120);*/
+
                 }
                 else if(z instanceof ConHeadZombie){
                     if(z.getHealth() <= 200){

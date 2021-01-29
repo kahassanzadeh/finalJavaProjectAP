@@ -41,7 +41,7 @@ public class CherryBomb extends Plant{
             }
             while(z1.hasNext()){
                 Zombie temp = z1.next();
-                Rectangle zRect = new Rectangle((int) temp.posX,109 + temp.lane * 120,400,120);
+                Rectangle zRect = new Rectangle((int) temp.posX,109 + temp.lane * 120,100,120);
                 if(cRect.intersects(zRect)){
                     temp.reduceHealth(3000);
                     z1.remove();
@@ -50,7 +50,7 @@ public class CherryBomb extends Plant{
             if(z2 != null){
                 while(z2.hasNext()){
                     Zombie temp = z2.next();
-                    Rectangle zRect = new Rectangle((int) temp.posX,109 + temp.lane * 120,400,120);
+                    Rectangle zRect = new Rectangle((int) temp.posX,109 + temp.lane * 120,100,120);
                     if(cRect.intersects(zRect)){
                         temp.reduceHealth(3000);
                         z2.remove();
@@ -60,7 +60,7 @@ public class CherryBomb extends Plant{
             if(z3 != null){
                 while(z3.hasNext()){
                     Zombie temp = z3.next();
-                    Rectangle zRect = new Rectangle((int) temp.posX,109 + temp.lane * 120,400,120);
+                    Rectangle zRect = new Rectangle((int) temp.posX,109 + temp.lane * 120,100,120);
                     if(cRect.intersects(zRect)){
                         temp.reduceHealth(3000);
                         z3.remove();

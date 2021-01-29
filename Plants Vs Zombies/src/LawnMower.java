@@ -12,6 +12,8 @@ public class LawnMower extends JPanel {
 
     private int xPosition = -25;
 
+    private boolean shouldStart = false;
+
     public LawnMower(Image image,int lane,GameController gc){
 
         this.image = image;
@@ -29,10 +31,46 @@ public class LawnMower extends JPanel {
         g.drawImage(image,0,0,null);
     }
 
+    public void advance(){
+        Rectangle lRect = new Rectangle(xPosition,109 + (lane)*120,100,120);
+        Iterator<Zombie> zombieIterator = gc.getAllOfZombies().get(lane).iterator();
+
+        while (zombieIterator.hasNext()) {
+            try{
+                Zombie temp = zombieIterator.next();
+                Rectangle zRect = new Rectangle((int) temp.posX, 109 + lane * 120, 400, 120);
+                if (lRect.intersects(zRect)) {
+                    shouldStart = true;
+                }
+            }catch(Exception ignored){
+
+            }
+        }
+    }
+
     public void start(){
 
-        Rectangle lRect = new Rectangle(xPosition,(lane + 1) * 120,80,68);
+        Rectangle lRect = new Rectangle(xPosition,109 + (lane)*120,100,120);
         Iterator<Zombie> zombieIterator = gc.getAllOfZombies().get(lane).iterator();
+
+        while(xPosition <= 1000){
+            try{
+                Zombie temp = zombieIterator.next();
+                Rectangle zRect = new Rectangle((int) temp.posX,109 + lane*120,400,120);
+                if(lRect.intersects(zRect)){
+                    temp.reduceHealth(2000);
+                    zombieIterator.remove();
+                }
+            }catch(Exception ignored){
+
+            }finally {
+                xPosition += 10;
+                break;
+            }
+        }
+        /*Rectangle lRect = new Rectangle(xPosition,(lane + 1) * 120,80,68);
+        Iterator<Zombie> zombieIterator = gc.getAllOfZombies().get(lane).iterator();
+
 
         Zombie z = zombieIterator.next();
         Rectangle zRect = new Rectangle((int) z.posX,109 + lane*120,400,120);
@@ -40,7 +78,7 @@ public class LawnMower extends JPanel {
             gc.getAllOfZombies().get(lane).clear();
             gc.getAllOfLawnMowers().remove(this);
             gc.remove(this);
-        }
+        }*/
             /*zombieIterator.remove();
             if(zombieIterator.hasNext())
                 z = zombieIterator.next();
@@ -74,5 +112,9 @@ public class LawnMower extends JPanel {
 
     public int getLane() {
         return lane;
+    }
+
+    public boolean getShouldStart() {
+        return shouldStart;
     }
 }

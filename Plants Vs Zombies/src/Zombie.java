@@ -58,7 +58,7 @@ public class Zombie {
 
     /**
      * At the beginning of this method we check whether the zombie is in contact with a plant or not
-     *If it comes in contact with the plant, it will continue to reduce the plant life, and if the plant dies, the plant will be destroyed
+     * If it comes in contact with the plant, it will continue to reduce the plant life, and if the plant dies, the plant will be destroyed
      * If it does not come into contact with the plant, it will continue on its way to the end of the lain
      */
     public void onrush()
