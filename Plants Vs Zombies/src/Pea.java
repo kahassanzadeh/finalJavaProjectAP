@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.io.Serializable;
 import java.util.Iterator;
 
 /**
@@ -6,10 +7,12 @@ import java.util.Iterator;
  * version 1.0
  */
 
-public class Pea {
+public class Pea implements Serializable {
 
     public int posX;
+
     protected GameController gc;
+
     public int myLane;
 
     public Pea(GameController  gc,int lane,int startX){

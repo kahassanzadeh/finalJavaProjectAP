@@ -1,14 +1,15 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
+import java.io.IOException;
+import java.io.Serializable;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class GameController extends JLayeredPane implements MouseMotionListener {
+public class GameController extends JLayeredPane implements Serializable {
 
     private CellInfo[][] allGameCells = new CellInfo[5][9];
 
@@ -18,26 +19,24 @@ public class GameController extends JLayeredPane implements MouseMotionListener 
 
     private ArrayList<Sun> allOfSuns;
 
-    private Timer randomZombieGenerator ;
+    private  Timer sunProducer;
 
-    private final Timer sunProducer;
+    private  Timer advanceTimer;
 
-    private final Timer advanceTimer;
+    private  Timer updatingScreen;
 
     private int sunScore ;
-
-    private final Timer  updatingScreen;
 
     //the card that had been clicked
     private InsideCellType clickedCellType;
 
-    private JLabel sunScoreLabel = new JLabel();
+    private  JLabel sunScoreLabel = new JLabel();
 
     private ArrayList<LawnMower> allOfLawnMowers;
 
     private final String gameMode;
 
-    private final int stage;
+    private int stage;
 
     private boolean gameOver = false;
 
@@ -45,19 +44,134 @@ public class GameController extends JLayeredPane implements MouseMotionListener 
 
     private int seconds = 0;
 
-    private Timer secondsCounter;
+    private  Timer secondsCounter;
 
-    private final Timer firstStageZombieGenerator;
+    private  Timer firstStageZombieGenerator;
 
-    private final Timer secondStageZombieGenerator;
+    private  Timer secondStageZombieGenerator;
 
-    private final Timer thirdStageZombieGenerator;
+    private  Timer thirdStageZombieGenerator;
+
+    private  Timer pauseSunProducerTimer;
+
+    private  Timer firstStageZombieGeneratorPause;
+
+    private  Timer secondStageZombieGeneratorPause;
+
+    private  Timer thirdStageZombieGeneratorPause;
+
+    private  InsideGameMenu pausePanel;
+
+    private  InsideGameMenuPanel pauseMenu;
+
+    private class PausePanelActionListener implements ActionListener,Serializable{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            updatingScreen.stop();
+            advanceTimer.stop();
+            sunProducer.stop();
+            secondsCounter.stop();
+            try{
+                firstStageZombieGenerator.stop();
+                secondStageZombieGenerator.stop();
+                thirdStageZombieGenerator.stop();
+                stopAllPlantsTimer();
+            }catch(Exception ignored){
+            }
+            pauseMenu = new InsideGameMenuPanel(GameController.this);
+            pauseMenu.showPausePanel();
+        }
+    }
+
+    private class UpdatingScreenActionListener implements ActionListener,Serializable{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            repaint();
+
+        }
+    }
+
+    private class AdvancerTimerActionListener implements ActionListener,Serializable{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            advance();
+        }
+    }
+
+    private class SunProducerActionListener implements ActionListener,Serializable{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            SecureRandom secureRandom= new SecureRandom();
+            Sun temp = new Sun(GameController.this,secureRandom.nextInt(800) + 100,0,secureRandom.nextInt(300) + 200);
+            allOfSuns.add(temp);
+            add(temp,JLayeredPane.MODAL_LAYER);
+        }
+    }
+
+    private class FirstStageZombieGeneratorActionListener implements ActionListener,Serializable{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            SecureRandom secureRandom = new SecureRandom();
+            int lane = secureRandom.nextInt(5);
+            int zombie = secureRandom.nextInt(3);
+            Zombie temp = zombieProducer(zombie,GameController.this,lane);
+            allOfZombies.get(lane).add(temp);
+        }
+    }
+
+    private class SecondsStageZombieGeneratorActionListener implements ActionListener,Serializable{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            SecureRandom secureRandom = new SecureRandom();
+            int lane = secureRandom.nextInt(5);
+            int zombie = secureRandom.nextInt(3);
+            Zombie temp1 = zombieProducer(zombie,GameController.this,lane);
+            allOfZombies.get(lane).add(temp1);
+            lane = secureRandom.nextInt(5);
+            zombie = secureRandom.nextInt(3);
+            Zombie temp2 = zombieProducer(zombie,GameController.this,lane);
+            allOfZombies.get(lane).add(temp2);
+        }
+    }
+
+    private class SecondsCounterActionListener implements ActionListener,Serializable{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            seconds++;
+            if(seconds >= 1 && !firstStageZombieGenerator.isRunning()){
+                firstStageZombieGenerator.start();
+            }else if(seconds >= 151 && !secondStageZombieGenerator.isRunning()){
+                stage = 2;
+                firstStageZombieGenerator.stop();
+                secondStageZombieGenerator.start();
+            }else if(seconds >= 331 && !thirdStageZombieGenerator.isRunning()){
+                stage = 3;
+                secondStageZombieGenerator.stop();
+                thirdStageZombieGenerator.start();
+            }else if(seconds >= 481){
+                gameOver = false;
+                JOptionPane.showMessageDialog(GameController.this,"Congratulations! You Won");
+                gameMap.dispose();
+                thirdStageZombieGenerator.stop();
+                updatingScreen.stop();
+                advanceTimer.stop();
+                sunProducer.stop();
+            }
+        }
+    }
 
 
 
 
 
-    public GameController(JLabel sunScoreLabel,int sunScore,String gameMode,GameMap gameMap){
+    public GameController(JLabel sunScoreLabel,int sunScore,String gameMode,GameMap gameMap) throws IOException {
         this.gameMap = gameMap;
         this.stage = 1;
         this.gameMode = gameMode;
@@ -66,7 +180,6 @@ public class GameController extends JLayeredPane implements MouseMotionListener 
 
         setSize(1000,752);
         setLayout(null);
-        addMouseMotionListener(this);
 
         allOfLawnMowers = new ArrayList<>();
 
@@ -88,6 +201,11 @@ public class GameController extends JLayeredPane implements MouseMotionListener 
         allOfZombies.add(new ArrayList<>());
         allOfZombies.add(new ArrayList<>());
 
+        pausePanel = new InsideGameMenu(new ImageIcon("E:\\university\\5th term\\AP\\Final Project\\PVS Design Kit\\images\\MenuButton.png"));
+        pausePanel.setLocation(900,5);
+        pausePanel.setAction(new PausePanelActionListener());
+        add(pausePanel,JLayeredPane.DEFAULT_LAYER);
+
         for(int i = 0; i < 5; i++){
             for(int j = 0; j < 9; j++){
                 allGameCells[i][j] = new CellInfo();
@@ -97,78 +215,24 @@ public class GameController extends JLayeredPane implements MouseMotionListener 
             }
         }
 
-        updatingScreen = new Timer(25,(ActionEvent e) -> {
-            repaint();
-        });
+
+        updatingScreen = new Timer(25,new UpdatingScreenActionListener());
         updatingScreen.start();
 
-        advanceTimer = new Timer(10,(ActionEvent e) ->{
-            advance();
-        });
+        advanceTimer = new Timer(10,new AdvancerTimerActionListener());
         advanceTimer.start();
 
-        sunProducer = new Timer(getSunProducingTimer(),(ActionEvent e) ->{
-            SecureRandom secureRandom= new SecureRandom();
-            Sun temp = new Sun(this,secureRandom.nextInt(800) + 100,0,secureRandom.nextInt(300) + 200);
-            allOfSuns.add(temp);
-            add(temp,JLayeredPane.MODAL_LAYER);
-        });
+        sunProducer = new Timer(getSunProducingTimer(), new SunProducerActionListener());
         sunProducer.start();
 
-        firstStageZombieGenerator = new Timer(30000,(ActionEvent e)->{
-            SecureRandom secureRandom = new SecureRandom();
-            int lane = secureRandom.nextInt(5);
-            int zombie = secureRandom.nextInt(3);
-            Zombie temp = zombieProducer(zombie,this,lane);
-            allOfZombies.get(lane).add(temp);
-        });
+        firstStageZombieGenerator = new Timer(30000,new FirstStageZombieGeneratorActionListener());
 
-        secondStageZombieGenerator = new Timer(30000,(ActionEvent e) -> {
-            SecureRandom secureRandom = new SecureRandom();
-            int lane = secureRandom.nextInt(5);
-            int zombie = secureRandom.nextInt(3);
-            Zombie temp1 = zombieProducer(zombie,this,lane);
-            allOfZombies.get(lane).add(temp1);
-            lane = secureRandom.nextInt(5);
-            zombie = secureRandom.nextInt(3);
-            Zombie temp2 = zombieProducer(zombie,this,lane);
-            allOfZombies.get(lane).add(temp2);
-        });
+        secondStageZombieGenerator = new Timer(30000,new SecondsCounterActionListener());
 
-        thirdStageZombieGenerator = new Timer(25000,(ActionEvent e) -> {
-            SecureRandom secureRandom = new SecureRandom();
-            int lane = secureRandom.nextInt(5);
-            int zombie = secureRandom.nextInt(3);
-            Zombie temp1 = zombieProducer(zombie,this,lane);
-            allOfZombies.get(lane).add(temp1);
-            lane = secureRandom.nextInt(5);
-            zombie = secureRandom.nextInt(3);
-            Zombie temp2 = zombieProducer(zombie,this,lane);
-            allOfZombies.get(lane).add(temp2);
-        });
+        thirdStageZombieGenerator = new Timer(25000, new SecondsCounterActionListener());
 
-        secondsCounter = new Timer(1000,(ActionEvent e)->{
-            seconds++;
-            if(seconds == 1){
-                firstStageZombieGenerator.start();
-            }else if(seconds == 151){
-                firstStageZombieGenerator.stop();
-                secondStageZombieGenerator.start();
-            }else if(seconds == 331){
-                secondStageZombieGenerator.stop();
-                thirdStageZombieGenerator.start();
-            }else if(seconds == 481){
-                gameOver = false;
-                JOptionPane.showMessageDialog(this,"Congratulations! You Won");
-                gameMap.dispose();
-                thirdStageZombieGenerator.stop();
-                updatingScreen.stop();
-                advanceTimer.stop();
-                sunProducer.stop();
-            }
-        });
+        secondsCounter = new Timer(1000,new SecondsCounterActionListener());
         secondsCounter.start();
-
 
     }
     public void advance(){
@@ -291,25 +355,15 @@ public class GameController extends JLayeredPane implements MouseMotionListener 
         this.clickedCellType = clickedCellType;
     }
 
-    @Override
-    public void mouseDragged(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseMoved(MouseEvent e) {
-
-    }
-
     public void GameOver() {
         gameOver = true;
         JOptionPane.showMessageDialog(this,"Zombies eat your brain !!!");
         gameMap.dispose();
 
-
     }
 
-    class ActionHandlerPlantingPlant implements ActionListener {
+
+    class ActionHandlerPlantingPlant implements ActionListener,Serializable {
 
         private int row;
 
@@ -324,33 +378,33 @@ public class GameController extends JLayeredPane implements MouseMotionListener 
         public void actionPerformed(ActionEvent e) {
             if(clickedCellType == InsideCellType.FreezePeaShooter){
                 if(sunScore >= 175){
-                    allGameCells[row][column].setInCellPlant(new FreezePeaShooter(GameController.this,row,column,1000,100));
+                    allGameCells[row][column].setInCellPlant(new FreezePeaShooter(GameController.this,row,column,1000,100,seconds * 1000));
                     allGameCells[row][column].getInCellPlant().start();
                     setSunScore(sunScore - 175);
                 }
             }
             if(clickedCellType == InsideCellType.PeaShooter){
                 if(sunScore >= 100){
-                    allGameCells[row][column].setInCellPlant(new PeaShooter(GameController.this,row,column,1000,70));
+                    allGameCells[row][column].setInCellPlant(new PeaShooter(GameController.this,row,column,1000,70,seconds * 1000));
                     allGameCells[row][column].getInCellPlant().start();
                     setSunScore(sunScore - 100);
                 }
             }
             if(clickedCellType == InsideCellType.SunFlower){
                 if(sunScore >= 50){
-                    allGameCells[row][column].setInCellPlant(new SunFlower(GameController.this,row,column,getSunFlowerProducingTimer(),50));
+                    allGameCells[row][column].setInCellPlant(new SunFlower(GameController.this,row,column,getSunFlowerProducingTimer(),50,seconds * 1000));
                     setSunScore(sunScore - 50);
                 }
             }
             if(clickedCellType == InsideCellType.WallNut){
                 if(sunScore >= 50){
-                    allGameCells[row][column].setInCellPlant(new GiantWallNut(GameController.this,row,column,2000,150));
+                    allGameCells[row][column].setInCellPlant(new GiantWallNut(GameController.this,row,column,2000,150,seconds * 1000));
                     setSunScore(sunScore - 50);
                 }
             }
             if(clickedCellType == InsideCellType.CherryBomb){
                 if(sunScore >= 150){
-                    allGameCells[row][column].setInCellPlant(new CherryBomb(GameController.this,row,column,2000,70));
+                    allGameCells[row][column].setInCellPlant(new CherryBomb(GameController.this,row,column,2000,70,seconds * 1000));
                     allGameCells[row][column].getInCellPlant().start();
                     setSunScore(sunScore - 150);
                 }
@@ -474,7 +528,139 @@ public class GameController extends JLayeredPane implements MouseMotionListener 
         return 0;
     }
 
+    private void stopAllPlantsTimer(){
+        for(int i = 0; i < 5; i++){
+            for(int j = 0; j < 9; j++){
+                if(allGameCells[i][j].getInCellPlant() != null){
+                    allGameCells[i][j].getInCellPlant().setStopingTimer(seconds * 1000);
+                    allGameCells[i][j].getInCellPlant().getTaskTimer().stop();
+                }
+            }
+        }
+    }
+
+    private void startAllPlantsTimer(){
+        for(int i = 0; i < 5; i++){
+            for(int j = 0; j < 9; j++){
+                if(allGameCells[i][j].getInCellPlant() != null){
+                    if(allGameCells[i][j].getInCellPlant() instanceof SunFlower){
+                        ((SunFlower) allGameCells[i][j].getInCellPlant()).startPausedTimer();
+                    }else{
+                        allGameCells[i][j].getInCellPlant().start();
+                    }
+                }
+            }
+        }
+    }
+
+    public void resumeGame(){
+        for(int i = 0; i < 5; i++){
+            for(int j = 0; j < 9; j++){
+                allGameCells[i][j].setAction(new ActionHandlerPlantingPlant(i,j));
+//                add(allGameCells[i][j],JLayeredPane.DEFAULT_LAYER);
+            }
+        }
+        updatingScreen.start();
+        advanceTimer.start();
+        secondsCounter.start();
+
+        firstStageZombieGeneratorPause = new Timer(30000 - ((seconds * 1000) % 30000), new FirstStageZombieGeneratorActionListener());
+
+        secondStageZombieGeneratorPause = new Timer(30000 - ((seconds * 1000) % 30000), new SecondsStageZombieGeneratorActionListener());
+
+        thirdStageZombieGeneratorPause = new Timer(25000 - ((seconds * 1000) % 25000), new SecondsStageZombieGeneratorActionListener());
+
+        if(stage == 1){
+            firstStageZombieGeneratorPause.setRepeats(false);
+            firstStageZombieGeneratorPause.start();
+        }else if(stage == 2){
+            secondStageZombieGeneratorPause.setRepeats(false);
+            secondStageZombieGeneratorPause.start();
+        }else if(stage == 3){
+            thirdStageZombieGeneratorPause.setRepeats(false);
+            thirdStageZombieGeneratorPause.start();
+        }
+
+        int delay = getSunProducingTimer() - ((seconds * 1000) % getSunProducingTimer());
+        pauseSunProducerTimer = new Timer(delay, new SunProducerActionListener());
+        pauseSunProducerTimer.setRepeats(false);
+        pauseSunProducerTimer.start();
+        sunProducer.setInitialDelay(getSunProducingTimer() + delay);
+        sunProducer.start();
+        startAllPlantsTimer();
+    }
+
+    public void setIsSaved(boolean isSaved){
+        gameMap.setIsSaved(isSaved);
+    }
+
+    public boolean isSaved(){
+        return gameMap.isSaved();
+    }
+
+    public GameMap getGameMap() {
+        return gameMap;
+    }
+
     public int getSeconds() {
         return seconds;
     }
+
+    public Timer getAdvanceTimer() {
+        return advanceTimer;
+    }
+
+    public String getGameMode() {
+        return gameMode;
+    }
+
+    public JLabel getSunScoreLabel() {
+        return sunScoreLabel;
+    }
+
+    public Timer getSunProducer() {
+        return sunProducer;
+    }
+
+    public int getStage() {
+        return stage;
+    }
+
+    public Timer getFirstStageZombieGenerator() {
+        return firstStageZombieGenerator;
+    }
+
+    public Timer getFirstStageZombieGeneratorPause() {
+        return firstStageZombieGeneratorPause;
+    }
+
+    public Timer getPauseSunProducerTimer() {
+        return pauseSunProducerTimer;
+    }
+
+
+    public Timer getSecondsCounter() {
+        return secondsCounter;
+    }
+
+    public Timer getSecondStageZombieGenerator() {
+        return secondStageZombieGenerator;
+    }
+
+    public Timer getSecondStageZombieGeneratorPause() {
+        return secondStageZombieGeneratorPause;
+    }
+
+    public Timer getThirdStageZombieGenerator() {
+        return thirdStageZombieGenerator;
+    }
+
+    public Timer getThirdStageZombieGeneratorPause() {
+        return thirdStageZombieGeneratorPause;
+    }
+
+    public Timer getUpdatingScreen() {
+        return updatingScreen;
+    }
+
 }

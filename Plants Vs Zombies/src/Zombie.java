@@ -1,12 +1,13 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
+import java.io.Serializable;
 
 /**
  * created by amirmahdi mirsharifi
  * version 1.0
  */
 
-public class Zombie {
+public class Zombie implements Serializable {
 
     //The amount of zombie lives that set at subclasses.
     protected int health;

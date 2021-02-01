@@ -1,6 +1,7 @@
 import javax.swing.*;
+import java.io.Serializable;
 
-public class Plant {
+public class Plant implements Serializable {
     protected int health;
     //plant's location
     protected int row;
@@ -11,13 +12,18 @@ public class Plant {
     protected int time;
     //tho object from GameController class that contain GameMap.
     protected GameController gc;
+
+    protected int startingTimer;
+
+    protected int stopingTimer;
     //constructor
-    public Plant(GameController gc,int row,int column,int time,int health){
+    public Plant(GameController gc,int row,int column,int time,int health,int startingTimer){
         this.row = row;
         this.column = column;
         this.gc = gc;
-        this.time=time;
+        this.time = time;
         this.health = health;
+        this.startingTimer = startingTimer;
     }
 
 
@@ -26,7 +32,7 @@ public class Plant {
      */
     public void start()
     {
-
+        taskTimer.start();
     }
 
     /**
@@ -75,5 +81,13 @@ public class Plant {
 
     public int getRow() {
         return row;
+    }
+
+    public Timer getTaskTimer() {
+        return taskTimer;
+    }
+
+    public void setStopingTimer(int stopingTimer) {
+        this.stopingTimer = stopingTimer;
     }
 }

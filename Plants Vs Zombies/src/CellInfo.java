@@ -2,6 +2,7 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.Serializable;
 
 /**
  * this class created for generating each cells in the map
@@ -11,12 +12,12 @@ import java.awt.event.*;
  *
  */
 
-public class CellInfo extends JPanel implements MouseListener {
+public class CellInfo extends JPanel implements MouseListener, Serializable {
 
     //plant inside the cell
     private Plant inCellPlant;
     //check if in the cell had been performed any Actions
-    private ActionListener actionListener;
+    private transient ActionListener actionListener;
     //
     private InsideCellType insideCellType;
 
@@ -24,7 +25,7 @@ public class CellInfo extends JPanel implements MouseListener {
      * constructor for this class
      */
     public CellInfo(){
-//        this.setBorder(new LineBorder(Color.red));
+        this.setBorder(new LineBorder(Color.red));
         this.setBackground(new Color(0,0,0,0));
         setOpaque(true);
         setSize(100,120);

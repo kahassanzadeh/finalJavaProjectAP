@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.Serializable;
 
 /**
  * this class created for managing each plant Cards
@@ -13,11 +14,11 @@ import java.awt.event.MouseListener;
  * @since Jan 13 2020
  * @version 1.0
  */
-public class PlantCard extends JPanel implements MouseListener {
+public class PlantCard extends JPanel implements MouseListener, Serializable {
     //image of the card
-    private Image image;
+    private ImageIcon image;
     //saving the action happens to the card
-    private ActionListener actionListener;
+    private transient ActionListener actionListener;
 
     private boolean cardIsAvailable = true;
 
@@ -27,11 +28,13 @@ public class PlantCard extends JPanel implements MouseListener {
 
     private int coolDown;
 
+    private Timer pausedTimer;
+
     /**
      * constructor of the card
      * @param image image of the card
      */
-    public PlantCard(Image image,int seconds){
+    public PlantCard(ImageIcon image,int seconds){
         setSize(64,90);
         this.image = image;
         addMouseListener(this);
@@ -70,7 +73,7 @@ public class PlantCard extends JPanel implements MouseListener {
     @Override
     public void paint(Graphics g){
         super.paintComponent(g);
-        g.drawImage(image,0,0,null);
+        g.drawImage(image.getImage(),0,0,null);
     }
 
     /**
@@ -90,6 +93,21 @@ public class PlantCard extends JPanel implements MouseListener {
 
     @Override
     public void mouseReleased(MouseEvent e) {
+        /*Timer pausedSecondCounter = null;
+        Timer finalPausedSecondCounter = pausedSecondCounter;*/
+
+        secondCounter = new Timer(500,(ActionEvent m)->{
+            counter += 500;
+            if(counter == coolDown){
+                cardIsAvailable = true;
+                counter = 0;
+                secondCounter.stop();
+            }
+        });
+        if(counter != 0){
+            cardIsAvailable = true;
+        }
+
         if(actionListener != null && cardIsAvailable){
             actionListener.actionPerformed(new ActionEvent(this,ActionEvent.RESERVED_ID_MAX+1,""));
             cardIsAvailable = false;

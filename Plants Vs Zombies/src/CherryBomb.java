@@ -1,18 +1,19 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.io.Serializable;
 import java.util.Iterator;
 
 /**
  * created by amirmahdi mirsharifi
  * version 1.0
  */
-public class CherryBomb extends Plant{
+public class CherryBomb extends Plant implements Serializable {
 
     private Rectangle cRect = new Rectangle(44 + ((column - 1) * 100),109 + ((row - 1) * 120),300,360);
 
-    public CherryBomb(GameController gc, int row, int column, int time, int health) {
-        super(gc, row, column, time, health);
+    public CherryBomb(GameController gc, int row, int column, int time, int health,int startingTimer) {
+        super(gc, row, column, time, health,startingTimer);
     }
 
     @Override

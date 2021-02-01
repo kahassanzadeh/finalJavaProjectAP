@@ -51,6 +51,8 @@ public class EnrollmentPanel {
                     PlayerController.checkUserName(userNameField.getText());
                     Person temp = new Person(nameField.getText(),userNameField.getText(),passwordField.getText());
                     PlayerController.addPerson(temp);
+                    FileManager fm = new FileManager();
+                    fm.saveAllOFPlayersToFile();
                     closingEnrollmentPanel();
                 }catch(Exception exception){
                     JOptionPane.showMessageDialog(frame,exception.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);

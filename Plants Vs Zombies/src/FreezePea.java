@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.io.Serializable;
 import java.util.Iterator;
 
 /**
@@ -7,7 +8,7 @@ import java.util.Iterator;
  */
 
 
-public class FreezePea extends Pea {
+public class FreezePea extends Pea implements Serializable {
 
     public FreezePea(GameController  gc,int lane,int startX){
         super(gc,lane,startX);

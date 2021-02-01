@@ -1,9 +1,11 @@
+import java.io.Serializable;
+
 /**
  * created by amirmahdi mirsharifi
  * version 1.0
  */
 
-public class BucketHeadZombie extends Zombie {
+public class BucketHeadZombie extends Zombie implements Serializable {
     /**
      * constructor
      * set GameController , zombie's lane,speed and damage

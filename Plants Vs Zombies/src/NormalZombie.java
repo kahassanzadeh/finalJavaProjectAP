@@ -1,9 +1,11 @@
+import java.io.Serializable;
+
 /**
  * created by amirmahdi mirsharifi
  * version 1.0
  */
 
-public class NormalZombie extends Zombie{
+public class NormalZombie extends Zombie implements Serializable {
     /**
      * constructor
      * set GameController , zombie's lane,speed and damage

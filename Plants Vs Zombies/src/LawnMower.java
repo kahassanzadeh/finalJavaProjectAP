@@ -1,11 +1,13 @@
 import javax.swing.*;
 import java.awt.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class LawnMower extends JPanel {
+public class LawnMower extends JPanel implements Serializable {
 
-    private Image image;
+    private ImageIcon image;
+
     private GameController gc;
 
     private int lane;
@@ -14,10 +16,10 @@ public class LawnMower extends JPanel {
 
     private boolean shouldStart = false;
 
-    public LawnMower(Image image,int lane,GameController gc){
+    public LawnMower(ImageIcon image,int lane,GameController gc){
 
         this.image = image;
-        this.image = this.image.getScaledInstance(80,68,Image.SCALE_SMOOTH);
+        //this.image = this.image.getImage().getScaledInstance(80,68,Image.SCALE_SMOOTH);
         this.setSize(80,68);
         this.setBackground(new Color(0,0,0,0));
         this.setOpaque(true);
@@ -28,7 +30,7 @@ public class LawnMower extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(image,0,0,null);
+        g.drawImage(image.getImage(),0,0,null);
     }
 
     public void advance(){
@@ -103,7 +105,7 @@ public class LawnMower extends JPanel {
     }
 
     public Image getImage() {
-        return image;
+        return image.getImage();
     }
 
     public int getxPosition() {

@@ -1,6 +1,8 @@
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class PlayerController {
+public class PlayerController implements Serializable {
 
     private static ArrayList<Person> allOfPLayers = new ArrayList<>();
 
@@ -29,4 +31,12 @@ public class PlayerController {
         allOfPLayers.add(person);
     }
 
+    public static void renewPlayers() throws IOException, ClassNotFoundException {
+        FileManager fm = new FileManager();
+        allOfPLayers = fm.renewAllOfPlayers();
+    }
+
+    public static ArrayList<Person> getAllOfPLayers() {
+        return allOfPLayers;
+    }
 }

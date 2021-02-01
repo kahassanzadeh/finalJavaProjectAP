@@ -4,8 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.Serializable;
 
-public class Sun extends JPanel implements MouseListener {
+public class Sun extends JPanel implements MouseListener, Serializable {
 
     private GameController gc;
 
@@ -17,7 +18,7 @@ public class Sun extends JPanel implements MouseListener {
 
     private int secondCounter;
 
-    private Image sunImage;
+    private transient Image sunImage;
 
     private Timer countingSeconds = new Timer(1000, (ActionEvent e)->{
         secondCounter++;

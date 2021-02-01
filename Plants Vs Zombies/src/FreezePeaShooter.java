@@ -1,16 +1,17 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
+import java.io.Serializable;
 
 /**
  * created by amirmahdi mirsharifi
  * version 1.0
  */
 
-public class FreezePeaShooter extends Plant {
+public class FreezePeaShooter extends Plant implements Serializable {
 
 
-    public FreezePeaShooter(GameController  gc, int row, int column,int time,int health) {
-        super(gc,row, column,time,health);
+    public FreezePeaShooter(GameController  gc, int row, int column,int time,int health,int startingTimer) {
+        super(gc,row, column,time,health,startingTimer);
 
     }
 

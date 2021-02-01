@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 /**
  * this class created for the login Panel of the game
@@ -17,7 +18,12 @@ public class LoginPanel {
     /**
      * constructor for this menu
      */
-    public LoginPanel(){
+    public LoginPanel() {
+        try{
+            PlayerController.renewPlayers();
+        }catch(Exception ignored){
+
+        }
         frame = new JFrame();
         frame.setLocation(500,300);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
