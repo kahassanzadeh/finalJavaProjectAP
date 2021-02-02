@@ -163,6 +163,9 @@ public class GameController extends JLayeredPane implements Serializable {
                 updatingScreen.stop();
                 advanceTimer.stop();
                 sunProducer.stop();
+                secondsCounter.stop();
+                gameMap.setGameStatus(GameStatus.Won);
+                gameMap.getPerson().winingGame(gameMode);
             }
         }
     }
@@ -359,6 +362,25 @@ public class GameController extends JLayeredPane implements Serializable {
         gameOver = true;
         JOptionPane.showMessageDialog(this,"Zombies eat your brain !!!");
         gameMap.dispose();
+        if(firstStageZombieGenerator.isRunning()){
+            firstStageZombieGenerator.stop();
+        }else if(firstStageZombieGeneratorPause.isRunning()){
+            firstStageZombieGeneratorPause.stop();
+        }else if(secondStageZombieGenerator.isRunning()){
+            secondStageZombieGenerator.stop();
+        }else if(secondStageZombieGeneratorPause.isRunning()){
+            secondStageZombieGeneratorPause.stop();
+        }else if(thirdStageZombieGenerator.isRunning()){
+            thirdStageZombieGenerator.stop();
+        }else if(thirdStageZombieGeneratorPause.isRunning()){
+            thirdStageZombieGeneratorPause.stop();
+        }
+        secondsCounter.stop();
+        updatingScreen.stop();
+        advanceTimer.stop();
+        sunProducer.stop();
+        gameMap.setGameStatus(GameStatus.Lost);
+        gameMap.getPerson().losingGame(gameMode);
 
     }
 

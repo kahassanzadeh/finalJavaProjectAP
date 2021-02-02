@@ -47,9 +47,12 @@ public class GameMap extends JFrame implements Serializable {
 
     private LawnMower[] lw = new LawnMower[5];
 
+    private GameStatus gameStatus;
+
 
 
     public GameMap(String difficulty,Person person) throws IOException {
+        gameStatus = GameStatus.Running;
         this.person = person;
         this.gameMode = difficulty;
         initFrame();
@@ -254,5 +257,13 @@ public class GameMap extends JFrame implements Serializable {
 
     public void setCounterOfThisGame(int counter){
         this.counterOfThisGame = counter;
+    }
+
+    public GameStatus getGameStatus() {
+        return gameStatus;
+    }
+
+    public void setGameStatus(GameStatus gameStatus) {
+        this.gameStatus = gameStatus;
     }
 }

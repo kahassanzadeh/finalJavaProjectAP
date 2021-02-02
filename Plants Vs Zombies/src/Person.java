@@ -13,9 +13,19 @@ public class Person implements Serializable {
 
     private ArrayList<GameMap> allOfGames;
 
-    private ArrayList<String> scoreList = new ArrayList<>();
+    private int score;
+
+    private int lose;
+
+    private int won;
+
+    private int hardGames;
+
+    private int normalGames;
 
     private int highScore;
+
+    private transient ArrayList<String> otherPlayersGameStatus;
 
     private transient UserPanel userPanel;
 
@@ -26,17 +36,30 @@ public class Person implements Serializable {
 
     public Person(String name,String userName,String password){
 
+        this.hardGames = 0;
+        this.normalGames = 0;
+        this.score = 0;
+        this.lose = 0;
+        this.won = 0;
         this.name = name;
         this.userName = userName;
         this.password = password;
         try{
             userPanel = new UserPanel(this);
         } catch (IOException ignored) {
+
         }
         allOfGames = new ArrayList<>();
 
         fm = new FileManager(this);
         fm.creatDirectory();
+        try{
+            otherPlayersGameStatus = fm.renewClients();
+        }catch (Exception ignored){
+
+        }
+
+        sendScoreToServer();
     }
 
     public void beginGame(String difficulty){
@@ -49,22 +72,12 @@ public class Person implements Serializable {
     }
 
 
-    public void writeGameMap(GameMap gameMap){
 
-    }
-
-    public void sendAndReceiveScoreToServer() {
-        setHighScore();
+    public void sendScoreToServer() {
         try(Socket client = new Socket("127.0.0.1",5050)){
             OutputStream out = client.getOutputStream();
-            InputStream in = client.getInputStream();
-            byte[] buffer = new byte[4096];
-            String temp = userName + " " + highScore;
+            String temp = this.toString();
             out.write(temp.getBytes());
-            while(true){
-                int read = in.read(buffer);
-
-            }
         }
         catch(IOException ex){
             System.err.println(ex);
@@ -140,5 +153,30 @@ public class Person implements Serializable {
     public void savePerson() throws IOException {
         FileManager fm = new FileManager(this);
         fm.savePerson(this);
+    }
+
+    public void losingGame(String difficulty){
+        this.lose++;
+        if(difficulty.equals("Normal")){
+            this.score -= 1;
+        }else if(difficulty.equals("Hard")){
+            this.score -= 3;
+        }
+        sendScoreToServer();
+    }
+
+    public void winingGame(String difficulty){
+        this.won++;
+        if(difficulty.equals("Normal")){
+            this.score += 3;
+        }else if(difficulty.equals("Hard")){
+            this.score += 10;
+        }
+        sendScoreToServer();
+    }
+
+    @Override
+    public String toString() {
+        return this.userName + "   " + "Loses : " + this.lose + "   " + "Wins : " + this.won + "   " + "Score : " + this.score + "   " + "HardGames : " + this.hardGames + "   " + "NormalGames : " + this.normalGames;
     }
 }

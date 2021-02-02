@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * this class created for UserPanel
@@ -103,6 +104,79 @@ public class UserPanel implements Serializable {
                 frame.add(mainPanel);
                 frame.setVisible(true);
 
+            }
+        });
+
+        setting.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame frame = new JFrame();
+                frame.setLocation(100,100);
+                frame.setSize(300,300);
+                frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+                JPanel mainPanel = new JPanel(new BorderLayout(5,5));
+
+                String[] games = {"Normal","Hard"};
+
+                JList<String> list = new JList<>(games);
+
+                JScrollPane scrollPane = new JScrollPane(list);
+                scrollPane.setPreferredSize(new Dimension(300,200));
+
+                JLabel label = new JLabel("Please Choose Your Game Mode");
+                label.setFont(new Font("Calibri",Font.BOLD,15));
+                label.setPreferredSize(new Dimension(300,50));
+
+                JButton loadGameButton = new JButton("OK");
+                loadGameButton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        difficulty = list.getSelectedValue();
+                        frame.setVisible(false);
+                    }
+                });
+
+                mainPanel.add(scrollPane,BorderLayout.CENTER);
+                mainPanel.add(label,BorderLayout.NORTH);
+                mainPanel.add(loadGameButton,BorderLayout.SOUTH);
+
+                frame.add(mainPanel);
+                frame.setVisible(true);
+
+            }
+        });
+
+        ranking.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame frame = new JFrame();
+                frame.setLocation(100,100);
+                frame.setSize(500,500);
+                frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+                JPanel mainPanel = new JPanel(new BorderLayout(5,5));
+                
+                FileManager fm = new FileManager();
+                ArrayList<String> clients = null;
+                try{
+                    clients = fm.renewClients();
+                }catch(Exception ignored){}
+
+                JTextArea textArea = new JTextArea();
+                textArea.setFont(new Font("Times New Roman",Font.PLAIN,15));
+                textArea.append("UserNames \n");
+                for(String s : clients){
+                    textArea.append(s + "\n");
+                }
+
+                textArea.setEditable(false);
+                JScrollPane scrollPane = new JScrollPane(textArea);
+
+                mainPanel.add(scrollPane,BorderLayout.CENTER);
+
+                frame.add(mainPanel);
+                frame.setVisible(true);
             }
         });
 

@@ -96,7 +96,7 @@ public class PlantCard extends JPanel implements MouseListener, Serializable {
         /*Timer pausedSecondCounter = null;
         Timer finalPausedSecondCounter = pausedSecondCounter;*/
 
-        secondCounter = new Timer(500,(ActionEvent m)->{
+        /*secondCounter = new Timer(500,(ActionEvent m)->{
             counter += 500;
             if(counter == coolDown){
                 cardIsAvailable = true;
@@ -106,7 +106,7 @@ public class PlantCard extends JPanel implements MouseListener, Serializable {
         });
         if(counter != 0){
             cardIsAvailable = true;
-        }
+        }*/
 
         if(actionListener != null && cardIsAvailable){
             actionListener.actionPerformed(new ActionEvent(this,ActionEvent.RESERVED_ID_MAX+1,""));

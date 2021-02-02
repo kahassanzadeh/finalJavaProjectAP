@@ -25,7 +25,7 @@ public class CellInfo extends JPanel implements MouseListener, Serializable {
      * constructor for this class
      */
     public CellInfo(){
-        this.setBorder(new LineBorder(Color.red));
+//        this.setBorder(new LineBorder(Color.red));
         this.setBackground(new Color(0,0,0,0));
         setOpaque(true);
         setSize(100,120);

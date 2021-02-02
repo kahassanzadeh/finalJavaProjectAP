@@ -64,4 +64,16 @@ public class FileManager {
         writeGameMapToFile.writeToFile(PlayerController.getAllOfPLayers());
         writeGameMapToFile.closeConnection();
     }
+
+    public void saveClientsListServer(ArrayList<String> clientList) throws IOException {
+        writeGameMapToFile = new WriteObjectToFile("./PlayersInfo/clientsList.ser");
+        writeGameMapToFile.writeToFile(clientList);
+        writeGameMapToFile.closeConnection();
+    }
+
+    public ArrayList<String> renewClients() throws IOException, ClassNotFoundException {
+        readObjectFromFile = new ReadObjectFromFile("./PlayersInfo/clientsList.ser");
+        return (ArrayList<String>) readObjectFromFile.readFromFile();
+    }
+
 }

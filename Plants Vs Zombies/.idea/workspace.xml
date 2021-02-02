@@ -20,68 +20,34 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="423490eb-5c40-4d6d-bd2c-74fd83f0165b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/FileManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/InsideGameMenu.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/InsideGameMenuPanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ReadObjectFromFile.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/WriteObjectToFile.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GameStatus.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Plants Vs Zombies/BucketHeadZombie.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Plants Vs Zombies/BucketHeadZombie.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Plants Vs Zombies/CellInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Plants Vs Zombies/CellInfo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Plants Vs Zombies/CherryBomb.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Plants Vs Zombies/CherryBomb.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Plants Vs Zombies/ConHeadZombie.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Plants Vs Zombies/ConHeadZombie.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Plants Vs Zombies/EnrollmentPanel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Plants Vs Zombies/EnrollmentPanel$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Plants Vs Zombies/EnrollmentPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Plants Vs Zombies/EnrollmentPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Plants Vs Zombies/FreezePea.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Plants Vs Zombies/FreezePea.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Plants Vs Zombies/FreezePeaShooter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Plants Vs Zombies/FreezePeaShooter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Persons/kamyar/1.ser" beforeDir="false" afterPath="$PROJECT_DIR$/Persons/kamyar/1.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Persons/kamyar/kamyar.ser" beforeDir="false" afterPath="$PROJECT_DIR$/Persons/kamyar/kamyar.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PlayersInfo/allOfPLayers.ser" beforeDir="false" afterPath="$PROJECT_DIR$/PlayersInfo/allOfPLayers.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Plants Vs Zombies/ClientHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Plants Vs Zombies/ClientHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Plants Vs Zombies/FileManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Plants Vs Zombies/FileManager.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Plants Vs Zombies/GameController$ActionHandlerPlantingPlant.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Plants Vs Zombies/GameController$ActionHandlerPlantingPlant.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Plants Vs Zombies/GameController$SecondsCounterActionListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Plants Vs Zombies/GameController$SecondsCounterActionListener.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Plants Vs Zombies/GameController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Plants Vs Zombies/GameController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Plants Vs Zombies/GameImages.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Plants Vs Zombies/GameImages.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Plants Vs Zombies/GameMap.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Plants Vs Zombies/GameMap.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Plants Vs Zombies/GiantWallNut.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Plants Vs Zombies/GiantWallNut.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Plants Vs Zombies/InsideCellType.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Plants Vs Zombies/InsideCellType.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Plants Vs Zombies/LawnMower.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Plants Vs Zombies/LawnMower.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Plants Vs Zombies/LoginPanel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Plants Vs Zombies/LoginPanel$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Plants Vs Zombies/LoginPanel$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Plants Vs Zombies/LoginPanel$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Plants Vs Zombies/LoginPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Plants Vs Zombies/LoginPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Plants Vs Zombies/NormalZombie.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Plants Vs Zombies/NormalZombie.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Plants Vs Zombies/Pea.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Plants Vs Zombies/Pea.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Plants Vs Zombies/PeaShooter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Plants Vs Zombies/PeaShooter.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Plants Vs Zombies/Person.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Plants Vs Zombies/Person.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Plants Vs Zombies/Plant.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Plants Vs Zombies/Plant.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Plants Vs Zombies/PlantCard.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Plants Vs Zombies/PlantCard.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Plants Vs Zombies/PlayerController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Plants Vs Zombies/PlayerController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Plants Vs Zombies/Sun.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Plants Vs Zombies/Sun.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Plants Vs Zombies/SunFlower.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Plants Vs Zombies/SunFlower.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Plants Vs Zombies/TestClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Plants Vs Zombies/TestClass.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Plants Vs Zombies/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Plants Vs Zombies/Server.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Plants Vs Zombies/UserPanel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Plants Vs Zombies/UserPanel$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Plants Vs Zombies/UserPanel$2$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Plants Vs Zombies/UserPanel$2$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Plants Vs Zombies/UserPanel$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Plants Vs Zombies/UserPanel$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Plants Vs Zombies/UserPanel$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Plants Vs Zombies/UserPanel$3.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Plants Vs Zombies/UserPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Plants Vs Zombies/UserPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Plants Vs Zombies/Zombie.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Plants Vs Zombies/Zombie.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BucketHeadZombie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BucketHeadZombie.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CellInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CellInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CherryBomb.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CherryBomb.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ConHeadZombie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ConHeadZombie.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/EnrollmentPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EnrollmentPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FreezePea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FreezePea.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FreezePeaShooter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FreezePeaShooter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ClientHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FileManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FileManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GameImages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameImages.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GameMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameMap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GiantWallNut.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GiantWallNut.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/InsideCellType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/InsideCellType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/LawnMower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/LawnMower.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/LoginPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/LoginPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/NormalZombie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/NormalZombie.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pea.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PeaShooter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PeaShooter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Person.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Plant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Plant.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/PlantCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PlantCard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PlayerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PlayerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Sun.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Sun.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SunFlower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SunFlower.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TestClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TestClass.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/UserPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Zombie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Zombie.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,6 +58,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -126,7 +93,14 @@
       <recent name="E:\university\5th term\AP\Final Project\Plants Vs Zombies\src" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Server">
+    <configuration name="Server" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="Server" />
+      <module name="Plants Vs Zombies" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="TestClass" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="TestClass" />
       <module name="Plants Vs Zombies" />
@@ -136,6 +110,10 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.Server" />
+      <item itemvalue="Application.TestClass" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.TestClass" />
@@ -160,7 +138,9 @@
       <workItem from="1611905905409" duration="10773000" />
       <workItem from="1611950430588" duration="1475000" />
       <workItem from="1612020216775" duration="15824000" />
-      <workItem from="1612037461670" duration="59455000" />
+      <workItem from="1612037461670" duration="60244000" />
+      <workItem from="1612263791279" duration="9017000" />
+      <workItem from="1612281962071" duration="4399000" />
     </task>
     <servers />
   </component>
@@ -180,14 +160,18 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1611345695256">
+    <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1612270790458">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1611345695256" />
-    <state x="574" y="119" key="#com.intellij.ide.util.MemberChooser" timestamp="1612180486097">
+    <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1612270790458" />
+    <state x="574" y="119" key="#com.intellij.ide.util.MemberChooser" timestamp="1612265306467">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="574" y="119" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1612180486097" />
+    <state x="574" y="119" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1612265306467" />
+    <state x="498" y="202" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1612270650573">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="498" y="202" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1536.824@0.0.1536.824" timestamp="1612270650573" />
     <state x="551" y="303" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1611518014263">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -208,38 +192,38 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="548" y="153" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1611906252962" />
-    <state width="1493" height="206" key="GridCell.Tab.0.bottom" timestamp="1612207847427">
+    <state width="1493" height="206" key="GridCell.Tab.0.bottom" timestamp="1612295447463">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="206" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1612207847427" />
-    <state width="1493" height="206" key="GridCell.Tab.0.center" timestamp="1612207847427">
+    <state width="1493" height="206" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1612295447463" />
+    <state width="1493" height="206" key="GridCell.Tab.0.center" timestamp="1612295447463">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="206" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1612207847427" />
-    <state width="1493" height="206" key="GridCell.Tab.0.left" timestamp="1612207847427">
+    <state width="1493" height="206" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1612295447463" />
+    <state width="1493" height="206" key="GridCell.Tab.0.left" timestamp="1612295447463">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="206" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1612207847427" />
-    <state width="1493" height="206" key="GridCell.Tab.0.right" timestamp="1612207847427">
+    <state width="1493" height="206" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1612295447463" />
+    <state width="1493" height="206" key="GridCell.Tab.0.right" timestamp="1612295447463">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="206" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1612207847427" />
-    <state width="1493" height="260" key="GridCell.Tab.1.bottom" timestamp="1612207521657">
+    <state width="1493" height="206" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1612295447463" />
+    <state width="1493" height="260" key="GridCell.Tab.1.bottom" timestamp="1612282822997">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="260" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1612207521657" />
-    <state width="1493" height="260" key="GridCell.Tab.1.center" timestamp="1612207521657">
+    <state width="1493" height="260" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1612282822997" />
+    <state width="1493" height="260" key="GridCell.Tab.1.center" timestamp="1612282822997">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="260" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1612207521657" />
-    <state width="1493" height="260" key="GridCell.Tab.1.left" timestamp="1612207521657">
+    <state width="1493" height="260" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1612282822993" />
+    <state width="1493" height="260" key="GridCell.Tab.1.left" timestamp="1612282822993">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="260" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1612207521657" />
-    <state width="1493" height="260" key="GridCell.Tab.1.right" timestamp="1612207521657">
+    <state width="1493" height="260" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1612282822993" />
+    <state width="1493" height="260" key="GridCell.Tab.1.right" timestamp="1612282822997">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="260" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1612207521657" />
+    <state width="1493" height="260" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1612282822997" />
     <state x="277" y="57" key="SettingsEditor" timestamp="1611906298189">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -260,6 +244,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1612125969355" />
+    <state x="46" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1612266170633">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="46" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1612266170633" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -270,9 +258,29 @@
           <option name="timeStamp" value="60" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/GameController.java</url>
-          <line>542</line>
-          <option name="timeStamp" value="101" />
+          <url>file://$PROJECT_DIR$/src/Person.java</url>
+          <line>37</line>
+          <option name="timeStamp" value="103" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/ClientHandler.java</url>
+          <line>71</line>
+          <option name="timeStamp" value="105" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/UserPanel.java</url>
+          <line>157</line>
+          <option name="timeStamp" value="107" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/ClientHandler.java</url>
+          <line>17</line>
+          <option name="timeStamp" value="109" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Server.java</url>
+          <line>16</line>
+          <option name="timeStamp" value="111" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
