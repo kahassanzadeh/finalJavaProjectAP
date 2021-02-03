@@ -22,7 +22,7 @@ public class LoginPanel {
         try{
             PlayerController.renewPlayers();
         }catch(Exception ignored){
-
+            System.out.println("Error");
         }
         frame = new JFrame();
         frame.setLocation(500,300);
@@ -66,8 +66,8 @@ public class LoginPanel {
                 Person registeredPerson;
                 try {
                     registeredPerson = PlayerController.searchPerson(userNameField.getText(), String.valueOf(passwordField.getPassword()));
-                    closeLoginPanel();
                     registeredPerson.showUserPanel();
+                    closeLoginPanel();
                 } catch (Exception exception) {
                     JOptionPane.showMessageDialog(frame,"Invalid UserName or Password, PLease Try Again","Error",JOptionPane.ERROR_MESSAGE);
                     passwordField.setText("");

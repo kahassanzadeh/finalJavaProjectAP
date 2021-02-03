@@ -4,16 +4,21 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+/**
+ * this class created for the lawn mowers
+ * @author mohammadreza hassanzadeh
+ * @version 1.1
+ */
 public class LawnMower extends JPanel implements Serializable {
-
+    //image of the lawnMower
     private ImageIcon image;
-
+    //game controller
     private GameController gc;
-
+    //lane of the lawn mower
     private int lane;
-
+    //initial position
     private int xPosition = -25;
-
+    //if the lawn mowers should start
     private boolean shouldStart = false;
 
     public LawnMower(ImageIcon image,int lane,GameController gc){
@@ -33,6 +38,9 @@ public class LawnMower extends JPanel implements Serializable {
         g.drawImage(image.getImage(),0,0,null);
     }
 
+    /**
+     * if the lawn mower intersect with zombies
+     */
     public void advance(){
         Rectangle lRect = new Rectangle(xPosition,109 + (lane)*120,100,120);
         Iterator<Zombie> zombieIterator = gc.getAllOfZombies().get(lane).iterator();
@@ -50,6 +58,9 @@ public class LawnMower extends JPanel implements Serializable {
         }
     }
 
+    /**
+     * if the lawn mower should tart
+     */
     public void start(){
 
         Rectangle lRect = new Rectangle(xPosition,109 + (lane)*120,100,120);
@@ -70,37 +81,6 @@ public class LawnMower extends JPanel implements Serializable {
                 break;
             }
         }
-        /*Rectangle lRect = new Rectangle(xPosition,(lane + 1) * 120,80,68);
-        Iterator<Zombie> zombieIterator = gc.getAllOfZombies().get(lane).iterator();
-
-
-        Zombie z = zombieIterator.next();
-        Rectangle zRect = new Rectangle((int) z.posX,109 + lane*120,400,120);
-        if(lRect.intersects(zRect)){
-            gc.getAllOfZombies().get(lane).clear();
-            gc.getAllOfLawnMowers().remove(this);
-            gc.remove(this);
-        }*/
-            /*zombieIterator.remove();
-            if(zombieIterator.hasNext())
-                z = zombieIterator.next();
-            else
-                xPosition += 25;
-            try{
-                while(xPosition < 1000){
-                    xPosition += 25;
-                    lRect = new Rectangle(xPosition,(lane + 1) * 120,80,68);
-                    zRect = new Rectangle((int) z.posX,109 + lane*120,400,120);
-                    if(lRect.intersects(zRect)){
-                        zombieIterator.remove();
-                        if(zombieIterator.hasNext())
-                            z = zombieIterator.next();
-                    }
-                }
-            }catch (Exception e){
-                xPosition += 25;
-            }
-        }*/
 
     }
 

@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.nio.Buffer;
 
+/**
+ * this class created for getting all of the images in the game
+ */
 public class GameImages implements Serializable {
 
     private transient static final Image backgroundImage = new ImageIcon("E:\\university\\5th term\\AP\\Final Project\\PVS Design Kit\\images\\mainBG.png").getImage();
@@ -29,9 +32,11 @@ public class GameImages implements Serializable {
 
     private transient static final Image wallNutImage = new ImageIcon("E:\\university\\5th term\\AP\\Final Project\\PVS Design Kit\\images\\Gifs\\walnut_full_life.gif").getImage();
 
+    private transient static final Image squashImage = new ImageIcon("E:\\university\\5th term\\AP\\Final Project\\PVS Design Kit\\images\\Transparent_squash.gif").getImage();
 
     private transient static Image cherryBomb = new ImageIcon("E:\\university\\5th term\\AP\\Final Project\\PVS Design Kit\\images\\Gifs\\newCherryBomb.gif").getImage();
 
+    private transient static final Image footballZombie = new ImageIcon("E:\\university\\5th term\\AP\\Final Project\\PVS Design Kit\\images\\footballZombie.png").getImage();
 
     private transient static Image sunImage = new ImageIcon("E:\\university\\5th term\\AP\\Final Project\\PVS Design Kit\\images\\sun.png").getImage();
 
@@ -104,4 +109,11 @@ public class GameImages implements Serializable {
         return thirdWavePic;
     }
 
+    public static Image getSquashImage() {
+        return squashImage;
+    }
+
+    public static Image getFootballZombie() {
+        return footballZombie;
+    }
 }

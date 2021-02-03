@@ -6,18 +6,31 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.Serializable;
 
+/**
+ * this class created for the menu panel in the game
+ * @author Mohammadreza Hassanzadeh
+ * @version 1.1
+ */
 public class InsideGameMenu extends JPanel implements MouseListener, Serializable {
-
+    //image icon
     private final ImageIcon image;
-
+    //action listener
     private ActionListener actionListener;
 
+    /**
+     * constructor for the panel
+     * @param image
+     */
     public InsideGameMenu(ImageIcon image){
         setSize(81,20);
         this.image = image;
         addMouseListener(this);
     }
 
+    /**
+     * setting the action for the panel
+     * @param actionListener
+     */
     public void setAction(ActionListener actionListener){
         this.actionListener = actionListener;
     }

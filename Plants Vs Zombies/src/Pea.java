@@ -8,19 +8,29 @@ import java.util.Iterator;
  */
 
 public class Pea implements Serializable {
-
+    //first position
     public int posX;
-
+    //game controller
     protected GameController gc;
-
+    //lane of the pea
     public int myLane;
 
+    /**
+     * constructor for the pea
+     * @param gc game controller
+     * @param lane lane of the pea
+     * @param startX start position
+     */
     public Pea(GameController  gc,int lane,int startX){
         this.gc = gc;
         this.myLane = lane;
         posX = startX;
     }
 
+    /**
+     * check if the pea has intrsect with a zombie
+     * @return
+     */
     public Pea advance(){
         Rectangle pRect = new Rectangle(posX,130+myLane*120,28,28);
         Iterator<Zombie> zombieIterator = gc.getAllOfZombies().get(myLane).iterator();

@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * this class created for the server
+ * @author Mohammad reza hassanzadhe
+ */
 public class Server {
 
     public static void main(String[] args){

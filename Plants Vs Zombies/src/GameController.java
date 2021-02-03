@@ -9,61 +9,60 @@ import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+/**
+ * this class created for controlling the game and timing
+ * @author Mohammadreza Hassanzadeh
+ * @version 1.1
+ */
 public class GameController extends JLayeredPane implements Serializable {
-
+    //9*5 cell info
     private CellInfo[][] allGameCells = new CellInfo[5][9];
-
+    //all of the zombies in the game
     private ArrayList<ArrayList<Zombie>> allOfZombies;
-
+    //all of the peas in the game
     private ArrayList<ArrayList<Pea>> allOfPeas;
-
+    //all of th esuns in the game
     private ArrayList<Sun> allOfSuns;
-
+    //timer to produce sun
     private  Timer sunProducer;
-
+    //timer to advance elements
     private  Timer advanceTimer;
-
+    //repaint timer
     private  Timer updatingScreen;
-
+    //sunScore
     private int sunScore ;
 
     //the card that had been clicked
     private InsideCellType clickedCellType;
-
+    //sun score label
     private  JLabel sunScoreLabel = new JLabel();
-
+    //all of the lawnMower of the game
     private ArrayList<LawnMower> allOfLawnMowers;
-
+//    Normal or Hard
     private final String gameMode;
-
+    //stages of the game
     private int stage;
-
+    //if the person lose
     private boolean gameOver = false;
-
+    //game map of the game
     private final GameMap gameMap;
-
+    //seconds of the game
     private int seconds = 0;
-
+    //counting the seconds
     private  Timer secondsCounter;
-
+    //generating first stage zombies
     private  Timer firstStageZombieGenerator;
-
+    //generating second stage zombies
     private  Timer secondStageZombieGenerator;
-
+    //generating third stage zombies
     private  Timer thirdStageZombieGenerator;
-
+    //for calculating the paused timer
     private  Timer pauseSunProducerTimer;
-
-    private  Timer firstStageZombieGeneratorPause;
-
-    private  Timer secondStageZombieGeneratorPause;
-
-    private  Timer thirdStageZombieGeneratorPause;
-
+    //menu panel inside the game
     private  InsideGameMenu pausePanel;
-
+    //menu panel inside the game
     private  InsideGameMenuPanel pauseMenu;
-
+    //action listener for pausing panel
     private class PausePanelActionListener implements ActionListener,Serializable{
 
         @Override
@@ -72,18 +71,37 @@ public class GameController extends JLayeredPane implements Serializable {
             advanceTimer.stop();
             sunProducer.stop();
             secondsCounter.stop();
-            try{
+            if(firstStageZombieGenerator.isRunning()){
                 firstStageZombieGenerator.stop();
-                secondStageZombieGenerator.stop();
-                thirdStageZombieGenerator.stop();
-                stopAllPlantsTimer();
-            }catch(Exception ignored){
             }
+            if(secondStageZombieGenerator.isRunning()){
+                secondStageZombieGenerator.stop();
+            }
+            if(thirdStageZombieGenerator.isRunning()) {
+                thirdStageZombieGenerator.stop();
+            }
+            /*try {
+                if(firstStageZombieGeneratorPause.isRunning()){
+                    firstStageZombieGeneratorPause.stop();
+                }
+                if(secondStageZombieGeneratorPause.isRunning()){
+                secondStageZombieGeneratorPause.stop();
+                }
+                if(thirdStageZombieGeneratorPause.isRunning()){
+                thirdStageZombieGeneratorPause.stop();
+                }
+                if(pauseSunProducerTimer.isRunning()){
+                pauseSunProducerTimer.stop();
+                }
+            }catch(Exception ignored){
+
+            }*/
+            stopAllPlantsTimer();
             pauseMenu = new InsideGameMenuPanel(GameController.this);
             pauseMenu.showPausePanel();
         }
     }
-
+    //action listener for repaint
     private class UpdatingScreenActionListener implements ActionListener,Serializable{
 
         @Override
@@ -92,7 +110,7 @@ public class GameController extends JLayeredPane implements Serializable {
 
         }
     }
-
+    //action listener for advance
     private class AdvancerTimerActionListener implements ActionListener,Serializable{
 
         @Override
@@ -100,7 +118,7 @@ public class GameController extends JLayeredPane implements Serializable {
             advance();
         }
     }
-
+    //action listener for sun producing
     private class SunProducerActionListener implements ActionListener,Serializable{
 
         @Override
@@ -111,35 +129,35 @@ public class GameController extends JLayeredPane implements Serializable {
             add(temp,JLayeredPane.MODAL_LAYER);
         }
     }
-
+    //first stage zombie generating action listener
     private class FirstStageZombieGeneratorActionListener implements ActionListener,Serializable{
 
         @Override
         public void actionPerformed(ActionEvent e) {
             SecureRandom secureRandom = new SecureRandom();
             int lane = secureRandom.nextInt(5);
-            int zombie = secureRandom.nextInt(3);
+            int zombie = secureRandom.nextInt(4);
             Zombie temp = zombieProducer(zombie,GameController.this,lane);
             allOfZombies.get(lane).add(temp);
         }
     }
-
+    //second stage zombie generating action listener
     private class SecondsStageZombieGeneratorActionListener implements ActionListener,Serializable{
 
         @Override
         public void actionPerformed(ActionEvent e) {
             SecureRandom secureRandom = new SecureRandom();
             int lane = secureRandom.nextInt(5);
-            int zombie = secureRandom.nextInt(3);
+            int zombie = secureRandom.nextInt(4);
             Zombie temp1 = zombieProducer(zombie,GameController.this,lane);
             allOfZombies.get(lane).add(temp1);
             lane = secureRandom.nextInt(5);
-            zombie = secureRandom.nextInt(3);
+            zombie = secureRandom.nextInt(4);
             Zombie temp2 = zombieProducer(zombie,GameController.this,lane);
             allOfZombies.get(lane).add(temp2);
         }
     }
-
+    //timing the game action listener
     private class SecondsCounterActionListener implements ActionListener,Serializable{
 
         @Override
@@ -166,14 +184,25 @@ public class GameController extends JLayeredPane implements Serializable {
                 secondsCounter.stop();
                 gameMap.setGameStatus(GameStatus.Won);
                 gameMap.getPerson().winingGame(gameMode);
+                if(gameMode.equals("Normal")){
+                    gameMap.getPerson().setNormalGames();
+                }else if(gameMode.equals("Hard")){
+                    gameMap.getPerson().setHardGames();
+                }
+                gameMap.getPerson().showUserPanel();
             }
         }
     }
 
 
-
-
-
+    /**
+     * constructor for the game control;er
+     * @param sunScoreLabel label of the sun
+     * @param sunScore sun
+     * @param gameMode Normal or Hard
+     * @param gameMap game map
+     * @throws IOException
+     */
     public GameController(JLabel sunScoreLabel,int sunScore,String gameMode,GameMap gameMap) throws IOException {
         this.gameMap = gameMap;
         this.stage = 1;
@@ -230,14 +259,18 @@ public class GameController extends JLayeredPane implements Serializable {
 
         firstStageZombieGenerator = new Timer(30000,new FirstStageZombieGeneratorActionListener());
 
-        secondStageZombieGenerator = new Timer(30000,new SecondsCounterActionListener());
+        secondStageZombieGenerator = new Timer(30000,new SecondsStageZombieGeneratorActionListener());
 
-        thirdStageZombieGenerator = new Timer(25000, new SecondsCounterActionListener());
+        thirdStageZombieGenerator = new Timer(25000, new SecondsStageZombieGeneratorActionListener());
 
         secondsCounter = new Timer(1000,new SecondsCounterActionListener());
         secondsCounter.start();
 
     }
+
+    /**
+     * running the advance method for the elemnts
+     */
     public void advance(){
         for(ArrayList<Zombie> arrayZ : allOfZombies){
             for(Zombie z : arrayZ){
@@ -293,6 +326,8 @@ public class GameController extends JLayeredPane implements Serializable {
                    /* Graphics2D g2 = (Graphics2D) g;
                     g2.setColor(Color.ORANGE);
                     g2.fillRect(44 + ((allGameCells[i][j].getInCellPlant().getColumn() - 1) * 100),109 + ((allGameCells[i][j].getInCellPlant().getRow() - 1) * 120),300,360);*/
+                }else if(allGameCells[i][j].getInCellPlant() instanceof Squash){
+                    g.drawImage(GameImages.getSquashImage(),50 + (j * 100),110 + (i * 120),null);
                 }
             }
         }
@@ -320,6 +355,13 @@ public class GameController extends JLayeredPane implements Serializable {
                     }
                     else{
                         g.drawImage(GameImages.getBucketHeadZombieImage(),z.getPosX(),109+(z.getLane()*120),null);
+                    }
+                }else if(z instanceof FootballZombie){
+                    if(z.getHealth() <= 200){
+                        g.drawImage(GameImages.getNormalZombieImage(),z.getPosX(),109+(z.getLane()*120),null);
+                    }
+                    else{
+                        g.drawImage(GameImages.getFootballZombie(),z.getPosX(),109+(z.getLane()*120),null);
                     }
                 }
             }
@@ -350,30 +392,23 @@ public class GameController extends JLayeredPane implements Serializable {
 
     }
 
-    public InsideCellType getClickedCellType() {
-        return clickedCellType;
-    }
-
+    /**
+     * setting the cell plant type
+     * @param clickedCellType
+     */
     public void setClickedCellType(InsideCellType clickedCellType) {
         this.clickedCellType = clickedCellType;
     }
 
+    /**
+     * this method will create the needs for gameOver situation
+     */
     public void GameOver() {
         gameOver = true;
         JOptionPane.showMessageDialog(this,"Zombies eat your brain !!!");
         gameMap.dispose();
         if(firstStageZombieGenerator.isRunning()){
             firstStageZombieGenerator.stop();
-        }else if(firstStageZombieGeneratorPause.isRunning()){
-            firstStageZombieGeneratorPause.stop();
-        }else if(secondStageZombieGenerator.isRunning()){
-            secondStageZombieGenerator.stop();
-        }else if(secondStageZombieGeneratorPause.isRunning()){
-            secondStageZombieGeneratorPause.stop();
-        }else if(thirdStageZombieGenerator.isRunning()){
-            thirdStageZombieGenerator.stop();
-        }else if(thirdStageZombieGeneratorPause.isRunning()){
-            thirdStageZombieGeneratorPause.stop();
         }
         secondsCounter.stop();
         updatingScreen.stop();
@@ -381,10 +416,13 @@ public class GameController extends JLayeredPane implements Serializable {
         sunProducer.stop();
         gameMap.setGameStatus(GameStatus.Lost);
         gameMap.getPerson().losingGame(gameMode);
+        gameMap.getPerson().showUserPanel();
 
     }
 
-
+    /**
+     * inner class for handling the cells
+     */
     class ActionHandlerPlantingPlant implements ActionListener,Serializable {
 
         private int row;
@@ -431,40 +469,82 @@ public class GameController extends JLayeredPane implements Serializable {
                     setSunScore(sunScore - 150);
                 }
             }
+            if(clickedCellType == InsideCellType.Squash){
+                if(sunScore >= 50){
+                    allGameCells[row][column].setInCellPlant(new Squash(GameController.this,row,column,2000,70,seconds * 1000));
+                    allGameCells[row][column].getInCellPlant().start();
+                    setSunScore(sunScore - 50);
+                }
+            }
             clickedCellType = InsideCellType.Empty;
         }
     }
 
+    /**
+     * setting the sun score
+     * @param score
+     */
     public void setSunScore(int score){
         this.sunScore = score;
         sunScoreLabel.setText(String.valueOf(sunScore));
     }
 
+    /**
+     * getting the cell info of the game
+     * @return cell info
+     */
     public CellInfo[][] getAllGameCells() {
         return allGameCells;
     }
 
+    /**
+     * getting all of the zombies in the game
+     * @return
+     */
     public ArrayList<ArrayList<Zombie>> getAllOfZombies() {
         return allOfZombies;
     }
 
+    /**
+     * getting all of the zombies in the game
+     * @return
+     */
     public ArrayList<ArrayList<Pea>> getAllOfPeas() {
         return allOfPeas;
     }
 
+    /**
+     * adding suns to the game
+     * @param sun Sun object
+     */
     public void addSuns(Sun sun){
         this.allOfSuns.add(sun);
         add(sun,1);
     }
 
+    /**
+     * getting all of the suns existin in the game
+     * @return
+     */
     public ArrayList<Sun> getAllOfSuns() {
         return allOfSuns;
     }
 
+    /**
+     * getting the sun score
+     * @return
+     */
     public int getSunScore() {
         return sunScore;
     }
 
+    /**
+     * creating zombies random
+     * @param type type of the zombie
+     * @param gp game Controller
+     * @param lane lane of the zombie
+     * @return zombie
+     */
     public Zombie zombieProducer(int type,GameController gp,int lane){
         Zombie temp = null;
         switch (type){
@@ -477,18 +557,33 @@ public class GameController extends JLayeredPane implements Serializable {
             case 2:
                 temp = new BucketHeadZombie(gp,lane,getDamageOfBucketHeadZombies(),getZombieSpeed());
                 break;
+            case 3:
+                temp = new FootballZombie(gp,lane,getDamageOfBucketHeadZombies(),0.6);
+                break;
         }
         return temp;
     }
 
+    /**
+     * removing sun in the gameMap
+     * @param temp
+     */
     public void removeSun(Sun temp){
         allOfSuns.remove(temp);
     }
 
+    /**
+     * getting all of the lawnmowers
+     * @return
+     */
     public ArrayList<LawnMower> getAllOfLawnMowers() {
         return allOfLawnMowers;
     }
 
+    /**
+     * generating zombies speed
+     * @return double speed
+     */
     public double getZombieSpeed(){
         switch(gameMode){
             case "Normal":
@@ -499,6 +594,10 @@ public class GameController extends JLayeredPane implements Serializable {
         return 0;
     }
 
+    /**
+     * generating damage of the zombies
+     * @return damage
+     */
     public int getDamageOfConeHeadZombies(){
         switch(gameMode){
             case "Normal":
@@ -509,6 +608,10 @@ public class GameController extends JLayeredPane implements Serializable {
         return 0;
     }
 
+    /**
+     * generating damage of the bucket head Zombie
+     * @return
+     */
     public int getDamageOfBucketHeadZombies(){
         switch(gameMode){
             case "Normal":
@@ -519,6 +622,10 @@ public class GameController extends JLayeredPane implements Serializable {
         return 0;
     }
 
+    /**
+     * getting the sun producing based on the game mode
+     * @return
+     */
     public int getSunProducingTimer(){
         switch(gameMode){
             case "Normal":
@@ -529,6 +636,10 @@ public class GameController extends JLayeredPane implements Serializable {
         return 0;
     }
 
+    /**
+     * getting the sun flower based on the game mode
+     * @return
+     */
     public int getSunFlowerProducingTimer(){
         switch(gameMode){
             case "Normal":
@@ -550,6 +661,9 @@ public class GameController extends JLayeredPane implements Serializable {
         return 0;
     }
 
+    /**
+     * stoping all of the elements timers
+     */
     private void stopAllPlantsTimer(){
         for(int i = 0; i < 5; i++){
             for(int j = 0; j < 9; j++){
@@ -561,6 +675,9 @@ public class GameController extends JLayeredPane implements Serializable {
         }
     }
 
+    /**
+     * starting all of the elements timer
+     */
     private void startAllPlantsTimer(){
         for(int i = 0; i < 5; i++){
             for(int j = 0; j < 9; j++){
@@ -575,33 +692,19 @@ public class GameController extends JLayeredPane implements Serializable {
         }
     }
 
+    /**
+     * this method will satisfy needs for resuming the game
+     */
     public void resumeGame(){
         for(int i = 0; i < 5; i++){
             for(int j = 0; j < 9; j++){
                 allGameCells[i][j].setAction(new ActionHandlerPlantingPlant(i,j));
-//                add(allGameCells[i][j],JLayeredPane.DEFAULT_LAYER);
             }
         }
         updatingScreen.start();
         advanceTimer.start();
         secondsCounter.start();
 
-        firstStageZombieGeneratorPause = new Timer(30000 - ((seconds * 1000) % 30000), new FirstStageZombieGeneratorActionListener());
-
-        secondStageZombieGeneratorPause = new Timer(30000 - ((seconds * 1000) % 30000), new SecondsStageZombieGeneratorActionListener());
-
-        thirdStageZombieGeneratorPause = new Timer(25000 - ((seconds * 1000) % 25000), new SecondsStageZombieGeneratorActionListener());
-
-        if(stage == 1){
-            firstStageZombieGeneratorPause.setRepeats(false);
-            firstStageZombieGeneratorPause.start();
-        }else if(stage == 2){
-            secondStageZombieGeneratorPause.setRepeats(false);
-            secondStageZombieGeneratorPause.start();
-        }else if(stage == 3){
-            thirdStageZombieGeneratorPause.setRepeats(false);
-            thirdStageZombieGeneratorPause.start();
-        }
 
         int delay = getSunProducingTimer() - ((seconds * 1000) % getSunProducingTimer());
         pauseSunProducerTimer = new Timer(delay, new SunProducerActionListener());
@@ -612,6 +715,10 @@ public class GameController extends JLayeredPane implements Serializable {
         startAllPlantsTimer();
     }
 
+    /**
+     * set if the game has saved in file before
+     * @param isSaved boolean
+     */
     public void setIsSaved(boolean isSaved){
         gameMap.setIsSaved(isSaved);
     }
@@ -620,69 +727,21 @@ public class GameController extends JLayeredPane implements Serializable {
         return gameMap.isSaved();
     }
 
+    /**
+     * getting the gameMap
+     * @return
+     */
     public GameMap getGameMap() {
         return gameMap;
     }
 
+    /**
+     * getting the seconds of the game
+     * @return
+     */
     public int getSeconds() {
         return seconds;
     }
 
-    public Timer getAdvanceTimer() {
-        return advanceTimer;
-    }
-
-    public String getGameMode() {
-        return gameMode;
-    }
-
-    public JLabel getSunScoreLabel() {
-        return sunScoreLabel;
-    }
-
-    public Timer getSunProducer() {
-        return sunProducer;
-    }
-
-    public int getStage() {
-        return stage;
-    }
-
-    public Timer getFirstStageZombieGenerator() {
-        return firstStageZombieGenerator;
-    }
-
-    public Timer getFirstStageZombieGeneratorPause() {
-        return firstStageZombieGeneratorPause;
-    }
-
-    public Timer getPauseSunProducerTimer() {
-        return pauseSunProducerTimer;
-    }
-
-
-    public Timer getSecondsCounter() {
-        return secondsCounter;
-    }
-
-    public Timer getSecondStageZombieGenerator() {
-        return secondStageZombieGenerator;
-    }
-
-    public Timer getSecondStageZombieGeneratorPause() {
-        return secondStageZombieGeneratorPause;
-    }
-
-    public Timer getThirdStageZombieGenerator() {
-        return thirdStageZombieGenerator;
-    }
-
-    public Timer getThirdStageZombieGeneratorPause() {
-        return thirdStageZombieGeneratorPause;
-    }
-
-    public Timer getUpdatingScreen() {
-        return updatingScreen;
-    }
 
 }

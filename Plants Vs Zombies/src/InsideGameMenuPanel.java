@@ -5,10 +5,15 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.io.Serializable;
 
+/**
+ * this class created for the menu for pausing and saving game
+ * @author mohammadreza hassanzadeh
+ * @version 1.1
+ */
 public class InsideGameMenuPanel implements Serializable {
-
+    //frame for the panel
     private JFrame frame;
-
+    //controller for the game
     private GameController gameController;
 
 

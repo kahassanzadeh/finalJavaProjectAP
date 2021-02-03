@@ -62,6 +62,10 @@ public class CellInfo extends JPanel implements MouseListener, Serializable {
         return (x > this.getX()) && (x < this.getX() + 100);
     }
 
+    /**
+     * getting the plant inside this cell
+     * @return plant
+     */
     public Plant getInCellPlant() {
         return inCellPlant;
     }
@@ -102,11 +106,17 @@ public class CellInfo extends JPanel implements MouseListener, Serializable {
 
     }
 
-
+    /**
+     * setting the action for this panel
+     * @param actionListener
+     */
     public void setAction(ActionListener actionListener) {
         this.actionListener = actionListener;
     }
 
+    /**
+     * setting the cell PLant into null
+     */
     public void setCellInfoPlantToNull(){
         inCellPlant = null;
     }

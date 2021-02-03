@@ -2,8 +2,12 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.io.Serializable;
 
+/**
+ * this class created for the sun flower
+ * @author Mohammadreza hassanzadeh
+ */
 public class SunFlower extends Plant implements Serializable {
-
+    //timer for deleting the suns
     private Timer pausedTimer;
 
 

@@ -3,6 +3,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * this panel created for the enrollment section to enroll new players
+ * @author Mohammadreza Hassanzadeh
+ * @version 1.1
+ */
 public class EnrollmentPanel {
 
     private JFrame frame;
@@ -69,11 +74,17 @@ public class EnrollmentPanel {
 
     }
 
+    /**
+     * showing the enrollment GUI
+     */
     public void showEnrollmentPanel(){
         frame.setVisible(true);
         frame.pack();
     }
 
+    /**
+     * closing the GUI
+     */
     public void closingEnrollmentPanel(){
         frame.setVisible(false);
     }

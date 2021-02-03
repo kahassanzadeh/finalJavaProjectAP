@@ -6,14 +6,24 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * this class created for handling the Clients
+ * @author Mohammadreza Hassanzadeh
+ * @version 1.1
+ */
 public class ClientHandler implements Runnable {
-
+    //connection socket
     private Socket connectionSocket;
-
+    //client number
     private int clientNumber;
-
+    //array list of all players
     private static ArrayList<String>  clientList = new ArrayList<>();
 
+    /**
+     * constructor for this class
+     * @param connectionSocket
+     * @param clientNumber
+     */
     public ClientHandler(Socket connectionSocket,int clientNumber){
         this.connectionSocket = connectionSocket;
         this.clientNumber = clientNumber;
@@ -26,9 +36,11 @@ public class ClientHandler implements Runnable {
     }
 
     public ClientHandler(){
-
     }
 
+    /**
+     * because of threading i have implemented this run  method
+     */
     @Override
     public void run() {
         try{
@@ -68,9 +80,6 @@ public class ClientHandler implements Runnable {
         }
     }
 
-    public static ArrayList<String> getClientList() {
-        return clientList;
-    }
 
 
 }

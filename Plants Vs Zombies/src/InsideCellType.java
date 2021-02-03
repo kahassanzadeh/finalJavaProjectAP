@@ -6,5 +6,7 @@ public enum InsideCellType implements Serializable {
     FreezePeaShooter,
     WallNut,
     CherryBomb,
-    SunFlower
+    SunFlower,
+    Squash;
+
 }

@@ -18,39 +18,44 @@ import java.io.Serializable;
  */
 public class GameMap extends JFrame implements Serializable {
 
-
+    //game controller
     private GameController gameController;
-
+    //sunscore label
     private  JLabel sunScoreLabel;
-
+    //initial score
     private int sunScore = 300;
-
-    private int score;
-
+    //normal or hard
     private String gameMode ;
-
+    // if the game has saved before
     private boolean isSaved = false;
-
+    //person of the game
     private Person person;
-
+    //counter of the game
     private int counterOfThisGame;
-
+    //sunflower card
     private  PlantCard sunflowerCard;
-
+    //peashooter card
     private  PlantCard peaShooterCard;
-
+    //freeze peashooter card
     private  PlantCard freezePeaShooterCard;
-
+    //wall nut card
     private  PlantCard wallNutCard;
-
+    //cherry bomb card
     private  PlantCard cherryBombCard;
-
+    //squash card
+    private PlantCard squashCard;
+    //all of the lawn mowers
     private LawnMower[] lw = new LawnMower[5];
-
+//    game status
     private GameStatus gameStatus;
 
 
-
+    /**
+     * constructor for the game
+     * @param difficulty normal or hard
+     * @param person person that plays
+     * @throws IOException
+     */
     public GameMap(String difficulty,Person person) throws IOException {
         gameStatus = GameStatus.Running;
         this.person = person;
@@ -79,6 +84,10 @@ public class GameMap extends JFrame implements Serializable {
         this.setVisible(false);
     }
 
+    /**
+     * initializing the cards and lawns
+     * @throws IOException
+     */
     private void initCardsAndLawns() throws IOException {
 
         /*BufferedImage sunflowerPic = ImageIO.read(new File("E:\\university\\5th term\\AP\\Final Project\\PVS Design Kit\\images\\Cards\\card_sunflower.png"));
@@ -123,6 +132,12 @@ public class GameMap extends JFrame implements Serializable {
         });
         getLayeredPane().add(cherryBombCard,JLayeredPane.MODAL_LAYER);
 
+        squashCard = new PlantCard(new ImageIcon("E:\\university\\5th term\\AP\\Final Project\\PVS Design Kit\\images\\SquashSeedPacket.png"),coolDownSecondsGetter("squash"));
+        squashCard.setLocation(435,8);
+        squashCard.setAction((ActionEvent e) ->{
+            gameController.setClickedCellType(InsideCellType.Squash);
+        });
+        getLayeredPane().add(squashCard,JLayeredPane.MODAL_LAYER);
 
         for (int i = 1; i <= 5; i++) {
             lw[i - 1] = new LawnMower(new ImageIcon("E:\\university\\5th term\\AP\\Final Project\\PVS Design Kit\\images\\Lawn_Mower.png"),i - 1,gameController);
@@ -131,6 +146,10 @@ public class GameMap extends JFrame implements Serializable {
         getLayeredPane().add(sunScoreLabel,JLayeredPane.MODAL_LAYER);
     }
 
+    /**
+     * initializing the frame
+     * @throws IOException
+     */
     private void initFrame() throws IOException {
 
         setLocation(200,20);
@@ -146,6 +165,9 @@ public class GameMap extends JFrame implements Serializable {
 
     }
 
+    /**
+     * renew the cards Action listener
+     */
     public void setCardsAction(){
         sunflowerCard.setAction((ActionEvent e) -> {
             gameController.setClickedCellType(InsideCellType.SunFlower);
@@ -168,12 +190,19 @@ public class GameMap extends JFrame implements Serializable {
         });
     }
 
+    /**
+     * renew the gameController
+     * @throws IOException
+     */
     private void makingNewGameController() throws IOException {
         gameController = new GameController(sunScoreLabel,sunScore,gameMode,this);
         gameController.setLocation(0,0);
         getLayeredPane().add(gameController,JLayeredPane.DEFAULT_LAYER);
     }
 
+    /**
+     * resuming the gameController
+     */
     private void resumingGameController(){
         gameController.resumeGame();
     }
@@ -185,10 +214,11 @@ public class GameMap extends JFrame implements Serializable {
         return sunScore;
     }
 
-    public int getScore() {
-        return score;
-    }
-
+    /**
+     * setting all of the cooldowns for cards
+     * @param cardType
+     * @return
+     */
     public int coolDownSecondsGetter(String cardType){
         if(cardType.equals("SunFlower")){
             return 7500;
@@ -206,6 +236,9 @@ public class GameMap extends JFrame implements Serializable {
             if(cardType.equals("cherryBomb")){
                 return 30000;
             }
+            if(cardType.equals("squash")){
+                return 30000;
+            }
         }
         if(gameMode.equals("Hard")){
             if(cardType.equals("freezePeaShooter")){
@@ -213,6 +246,9 @@ public class GameMap extends JFrame implements Serializable {
             }
             if(cardType.equals("cherryBomb")){
                 return 45000;
+            }
+            if(cardType.equals("squash")){
+                return 30000;
             }
         }
         return 0;
@@ -230,19 +266,29 @@ public class GameMap extends JFrame implements Serializable {
         return person;
     }
 
+    /**
+     * resuming the game map
+     * @throws IOException
+     */
     public void resumeGame() throws IOException {
         setCardsAction();
         resumingGameController();
         showGameMap();
     }
 
-
+    /**
+     * overriding to string method for game map
+     * @return
+     */
     @Override
     public String toString() {
         return "Game Number : " + counterOfThisGame + "    Seconds : " + gameController.getSeconds();
     }
 
-
+    /**
+     * getting th game number
+     * @return
+     */
     public int getCounterOfThisGame() {
         return counterOfThisGame;
     }
@@ -255,6 +301,10 @@ public class GameMap extends JFrame implements Serializable {
         return gameMode;
     }
 
+    /**
+     * setting the couynter of the game
+     * @param counter
+     */
     public void setCounterOfThisGame(int counter){
         this.counterOfThisGame = counter;
     }
@@ -263,6 +313,10 @@ public class GameMap extends JFrame implements Serializable {
         return gameStatus;
     }
 
+    /**
+     * setting game status
+     * @param gameStatus
+     */
     public void setGameStatus(GameStatus gameStatus) {
         this.gameStatus = gameStatus;
     }
